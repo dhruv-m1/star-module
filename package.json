@@ -1,0 +1,25 @@
+{
+  "name": "star-module",
+  "version": "1.0.0",
+  "description": "IB-CS-IA",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://dhruvtech@bitbucket.org/dhruvtech/star-module.git"
+  },
+  "keywords": [
+    "Computer",
+    "Science",
+    "IA"
+  ],
+  "author": "Dhruv Malik",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/dhruvtech/star-module#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongoose": "^4.10.7"
+  }
+}
