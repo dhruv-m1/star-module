@@ -14,3 +14,56 @@ mongoose.connection.once('open', function(){
     console.log('---------------');
     console.log(error);
 });
+
+const ProductList = mongoose.model('ProductList', new Schema({
+    name: String,
+    productId: String,
+    description: String,
+    cost: Number,
+}));
+
+const CategoryList = mongoose.model('CategoryList', new Schema({
+    name: String,
+    description: String
+}));
+
+const StockReceipt = mongoose.model('StockReceipt', new Schema({
+    timestamp: String,
+    productName: String,
+    productId: String,
+    batchId: String,
+    origin: String,
+    destination: String
+}));
+
+const StockTransfer = mongoose.model('StockTransfer', new Schema({
+    timestamp: String,
+    productName: String,
+    productId: String,
+    origin: String,
+    destination: String
+}));
+
+const StockLocation = mongoose.model('StockLocation', new Schema({
+    name: String,
+    address: String,
+    loactionId: String,
+    contact: String,
+    phone: Number
+}));
+
+const Inventory = mongoose.model('Inventory', new Schema({
+    productName: String,
+    productId: String,
+    loaction: String,
+    quantity: Number
+}));
+
+const Plants = mongoose.model('Plants', new Schema({
+    name: String,
+    owner: String,
+    address: String,
+    plantId: String,
+    contact: String,
+    phone: Number
+}));
