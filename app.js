@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 const gateway = require('./gateway');
-const routez = require('./routes/api');
+const routes = require('./routes/api');
 app.listen(process.env.port || 3030);
 
 app.use('/api', routes);
