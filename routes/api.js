@@ -3,5 +3,18 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../app-data/db-settings');
+
+//GET Requests
 router.get("/");
+
+//POST Requests
+router.post("/");
+
+//PULL Requests
+router.pull("/");
+
+//DELETE Requests
+router.delete("/")
+
+
 module.exports = router;
