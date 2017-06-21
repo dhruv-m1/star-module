@@ -15,55 +15,57 @@ mongoose.connection.once('open', function(){
     console.log(error);
 });
 
-const ProductList = mongoose.model('ProductList', new Schema({
+module.exports.ProductList = mongoose.model('ProductList', new Schema({
     name: String,
     productId: String,
     description: String,
-    cost: Number,
-}));
+    supplier: String,
+    category: String,
+    cost: Number
+},{ collection: 'ProductList' }));
 
-const CategoryList = mongoose.model('CategoryList', new Schema({
+module.exports.CategoryList = mongoose.model('CategoryList', new Schema({
     name: String,
     description: String
-}));
+},{ collection: 'CategoryList' }));
 
-const StockReceipt = mongoose.model('StockReceipt', new Schema({
+module.exports.StockReceipt = mongoose.model('StockReceipt', new Schema({
     timestamp: String,
     productName: String,
     productId: String,
     batchId: String,
     origin: String,
     destination: String
-}));
+},{ collection: 'StockReceipt' }));
 
-const StockTransfer = mongoose.model('StockTransfer', new Schema({
+module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
     timestamp: String,
     productName: String,
     productId: String,
     origin: String,
     destination: String
-}));
+},{ collection: 'StockTransfer' }));
 
-const StockLocation = mongoose.model('StockLocation', new Schema({
+module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
     name: String,
     address: String,
     loactionId: String,
     contact: String,
     phone: Number
-}));
+},{ collection: 'StockLocations' }));
 
-const Inventory = mongoose.model('Inventory', new Schema({
+module.exports.Inventory = mongoose.model('Inventory', new Schema({
     productName: String,
     productId: String,
     loaction: String,
     quantity: Number
-}));
+},{ collection: 'Inventory' }));
 
-const Plants = mongoose.model('Plants', new Schema({
+module.exports.Plants = mongoose.model('Plants', new Schema({
     name: String,
     owner: String,
     address: String,
     plantId: String,
     contact: String,
     phone: Number
-}));
+},{ collection: 'plants' }));
