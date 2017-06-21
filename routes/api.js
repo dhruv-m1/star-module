@@ -10,8 +10,8 @@ router.get("/");
 //POST Requests
 router.post("/");
 
-//PULL Requests
-router.pull("/");
+//PUT Requests
+router.put("/");
 
 //DELETE Requests
 router.delete("/")
