@@ -2,23 +2,28 @@
 const express = require('express');
 const router = express.Router();
 
-const fs = require('fs');
 const mongoose = require('mongoose');
 const db = require('../../../app-data/db-settings');
+const validator = require('../validate');
 
 //PUT Requests
 
-function validate(dataset, res){
-    var premissions = JSON.parse(fs.readFileSync(__dirname + '/premissions.json'));
 
-    if (premissions[dataset].allow === true){
-        return premissions[dataset].collection;
+router.put("/:dataset/" , function(req, res){
+    var collection = validator.premissions(req.params.dataset, res, "put");
+    res.set('Content-Type', 'application/json');
+
+    var validationResult = validator.schemaValidate(collection, req.body);
+
+    if(validationResult === true){
+        db[collection].findByIdAndUpdate(req.body._id, req.body).then(function(){
+                res.send(`{"status":"successful"}`);
+        });
     }
     else {
-        res.send(401);
+        res.send(validationResult);
     }
-}
+});
 
-router.put("/" , function(req, res){});
 
 module.exports = router;

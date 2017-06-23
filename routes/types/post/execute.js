@@ -2,25 +2,14 @@
 const express = require('express');
 const router = express.Router();
 
-const fs = require('fs');
 const mongoose = require('mongoose');
 const db = require('../../../app-data/db-settings');
+const validator = require('../validate');
 
 //POST Requests
 
-function validate(dataset, res){
-    var premissions = JSON.parse(fs.readFileSync(__dirname + '/premissions.json'));
-
-    if (premissions[dataset].allow === true){
-        return premissions[dataset].collection;
-    }
-    else {
-        res.send(401);
-    }
-}
-
 router.post("/:dataset/:skip/:limit" , function(req, res){
-    var collection = validate(req.params.dataset, res);
+    var collection = validator.premissions(req.params.dataset, res, "post");
     if(collection != null){
         db[collection].find(req.body).count(function (err, count) {
 
@@ -34,12 +23,21 @@ router.post("/:dataset/:skip/:limit" , function(req, res){
 });
 
 router.post("/:dataset/" , function(req, res){
-    var collection = validate(req.params.dataset, res);
+    var collection = validator.premissions(req.params.dataset, res, "post");
+    res.set('Content-Type', 'application/json');
     if(collection != null){
-        var newRecord = new db[collection](req.body);
-        newRecord.save(function (err) {
-            res.send(`"status":"successful"`);
-        });
+        var validationResult = validator.schemaValidate(collection, req.body);
+
+        if(validationResult === true){
+            var Record = new db[collection](req.body);
+            Record.save(function (err) {
+                res.send(`{"status":"successful"}`);
+            });
+        }
+        else {
+            res.send(validationResult);
+        }
+
     }
 });
 

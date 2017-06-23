@@ -1,0 +1,30 @@
+{
+    "products": {
+        "allow": true,
+        "collection": "ProductList"
+    },
+    "categories": {
+        "allow": true,
+        "collection": "CategoryList"
+    },
+    "stock-locations": {
+        "allow": false,
+        "collection": "StockLocations"
+    },
+    "plants": {
+        "allow": true,
+        "collection": "Plants"
+    },
+    "inventory": {
+        "allow": true,
+        "collection": "Inventory"
+    },
+    "stock-receipt": {
+        "allow": false,
+        "collection": "StockReceipt"
+    },
+    "stock-transfer": {
+        "allow": false,
+        "collection": "StockTransfer"
+    }
+}

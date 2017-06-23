@@ -2,24 +2,21 @@
 const express = require('express');
 const router = express.Router();
 
-const fs = require('fs');
+const validator = require('../validate');
 const mongoose = require('mongoose');
 const db = require('../../../app-data/db-settings');
 
-//DELETE Requests
+//PUT Requests
 
-function validate(dataset, res){
-    var premissions = JSON.parse(fs.readFileSync(__dirname + '/premissions.json'));
+router.delete("/:dataset/:id" , function(req, res){
+    var collection = validator.premissions(req.params.dataset, res, "delete");
+    if(collection != null){
+        db[collection].findByIdAndRemove(req.params.id, function (err, data) {
 
-    if (premissions[dataset].allow === true){
-        return premissions[dataset].collection;
+            res.send(`{"status":"successful"}`);
+        });
     }
-    else {
-        res.send(401);
-    }
-}
-
-router.delete("/" , function(req, res){});
+});
 
 
 module.exports = router;
