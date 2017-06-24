@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 
-const gateway = require('./gateway');
 const routes = require('./routes/core');
 app.listen(process.env.port || 3030);
 
@@ -13,5 +12,5 @@ app.set('view engine', 'ejs');
 //Renders for Demo Application
 
 app.get('/demo', function(req, res){
-    res.render('/demo/index');
+    res.render('demo/index');
 })

@@ -1,0 +1,15 @@
+.navbar-default{
+    background: #0747a6;
+    border: none;
+}
+.navbar{
+    border-radius: 0px;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: rgba(245, 245, 245, 0.9);
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand {
+    color: rgba(245, 245, 245, 0.75);
+    font-family: "Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
