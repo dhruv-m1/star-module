@@ -1,9 +1,43 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
 
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Stock Transfer & Reconciliation</a>
-    </div>
+<div class="col-lg-3 col-md-3">
+    <nav id="sidebar">
+        <section id="sidebar-heading">
+            <button type="button" class="close sidebar-toggle" id="sidebar-close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
 
-  </div>
-</nav>
+            <h1>Stock Transfer & Reconcilation</h1>
+        </section>
+
+        <section id="sidebar-location">
+            <section>
+                <span class="glyphicon glyphicon-map-marker"></span>
+                <span id="locationName">(Loading...)</span>
+                <br><small id="locationid"> </small>
+            </section>
+            <p>
+                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Change Location
+                </button>
+            </p>
+            <section class="collapse" id="collapseExample">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Select Stock Location</strong>
+                    </div>
+                    <div class="class-block">
+                        <ul class="list-group list-group-flush" id="location-choice-list">
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <nav class="nav flex-column">
+            <a class="nav-link active" href="#"><span class="glyphicon glyphicon-th"></span>Dashboard</a>
+            <a class="nav-link" href="#"><span class="glyphicon glyphicon-qrcode"></span>Scan items</a>
+            <a class="nav-link" href="#"><span class="glyphicon glyphicon-transfer"></span>Transfer</a>
+            <a class="nav-link" href="#"><span class="glyphicon glyphicon-search"></span>Search</a>
+            <a class="nav-link" href="#"><span class="glyphicon glyphicon-duplicate"></span>Logs</a>
+        </nav>
+    </nav>
+</div>

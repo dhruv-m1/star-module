@@ -49,7 +49,7 @@ module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
 module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
     name: String,
     address: String,
-    loactionId: String,
+    locationId: String,
     contact: String,
     phone: Number
 },{ collection: 'StockLocations' }));

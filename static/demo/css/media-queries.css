@@ -1,0 +1,51 @@
+/* 
+    This document contains all the media queries used to create responsive UI. ( Written by Dhruv M in June 2017 ).
+*/
+
+/* NAVIGATION */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    #sidebar h1{
+        font-size: 1.5em;
+        padding: 20px 2.5px 20px 15px;
+    }
+    #sidebar-location{
+        background: rgb(219, 222, 229);
+        padding: 10px 1px 5px 15px;
+        margin: 0;
+        top: 0;
+    }
+    .nav a {
+        font-size: 15px;
+    }
+ }
+
+ @media (max-width: 767px) {
+    #sidebar {
+        display: none;
+        width: 100%;
+    }
+    #sidebar-close{
+        display: block;
+    }
+    #sidebar-open{
+        display: block;
+    }
+ }
+
+ @media (max-width: 575px) {
+    #sidebar h1{
+        font-size: 1.5em;
+        padding: 20px 2.5px 20px 15px;
+    }
+    #sidebar-location{
+        background: rgb(219, 222, 229);
+        padding: 10px 1px 5px 15px;
+        margin: 0;
+        top: 0;
+    }
+    .nav a {
+        font-size: 15px;
+    }
+ }

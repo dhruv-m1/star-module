@@ -5,6 +5,15 @@
         <% include partials/dependencies.ejs %>
     </head>
     <body>
-        <% include partials/navigation.ejs %>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+                <% include partials/navigation.ejs %>
+                <nav>
+                    <button type="button" class="btn btn-default btn-md sidebar-toggle" id="sidebar-open">
+                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </button>
+                </nav>
+            </div>
+        </div>
     </body>
 </html>
