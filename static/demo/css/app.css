@@ -8,6 +8,7 @@ html, body{
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 10px;
+    width: 100%;
 }
 .no-padding-x{
     padding-left: 0;
@@ -136,9 +137,9 @@ html, body{
     margin-top: 12px;
 }
 #infocards-directory{
-    height: 247px !important;
     margin-left: 7px;
 }
+
 #infocards-directory .card-buttons{
     margin-top: 10px;
 }
@@ -148,6 +149,7 @@ html, body{
 
 #infocards-logs {
     margin-right: 7px;
+    height: 306.62px;
 }
 #infocards-about {
     height: 306.62px;

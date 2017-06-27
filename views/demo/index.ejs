@@ -2,8 +2,9 @@
 <html>
     <head>
         <title>Dashboard - Star Module Demo</title>
-        <% include partials/dependencies.ejs %>
+        <% include partials/universal-dependencies/external-css.ejs %>
     </head>
+    
     <body>
         <div class="container-fluid">
             <div class="row align-items-start no-gutters">
@@ -11,7 +12,8 @@
                 <% include partials/navigation.ejs %>
 
                 <div class="col-lg-9 col-md-9 scrollable">
-                    <div class="row">
+
+                    <div class="row content-top">
                         <header id="page-heading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">Home</li>
@@ -20,135 +22,12 @@
                         </header>
                     </div>
 
-                    <div class="row">
-                        <section id="infocards">
-                            <div class="row no-gutters">
-                                <div class="col-lg-5 col-md-5 no-padding-x" id="infocards-products">
-                                    <div class="card">
-                                        <h5 class="card-header">Products</h5>
-                                        <div class="card-block">
-                                            <h1 class="card-title">100127</h1>
-                                            <p class="card-text">So many products! Explore the catelog and be sure that you're always stocked up.</p>
-                                            <a href="#" class="btn btn-outline-primary card-buttons">Explore Products & Inventory</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 no-padding-x">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Inventory
-                                        </div>
-                                        <div class="card-block">
-                                            <h4 class="card-text">1170 (In-Stock)</h4>
-                                        </div>
-                                    </div>
-
-                                    <div class="card" id="infocards-categories">
-                                        <div class="card-header">
-                                            Categories
-                                        </div>
-                                        <div class="card-block">
-                                            <h4 class="card-text">25 (Total)</h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-3 no-padding-x">
-                                    <div class="card" id="infocards-directory">
-                                        <div class="card-header">Directory</div>
-                                        <div class="card-block">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><h4>26 <small>Depots</small></h4></li>
-                                                <li class="list-group-item"><h4>10 <small>Factories</small></h4></li>
-                                            </ul>
-                                            <a href="#" class="btn btn-outline-primary btn-sm card-buttons">Open</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-
-                            <div class="row no-gutters">
-                                <div class="col-lg-5 col-md-5 no-padding-x" id="infocards-logs">
-                                    <div class="card">
-                                        <div class="card-header">Logs (This Month)</div>
-                                        <div class="card-block">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><h4>100 <small>Transfer Ins</small></h4></li>
-                                                <li class="list-group-item"><h4>10 <small>Transfer Outs</small></h4></li>
-                                                <li class="list-group-item"><h4>150 <small>Receipts</small></h4></li>
-                                            </ul>
-                                            <a href="#" class="btn btn-outline-primary btn-sm card-buttons">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 no-padding-x">
-                                    <div class="card" id="infocards-about">
-                                        <div class="card-header">About Us</div>
-                                        <div class="card-block">
-                                            <h4 class="card-title">Luxor Stationary (Pune) </h4>
-                                            <p class="text">D501, Road #1, Industrial Area III, Pune, MH, India - 500032 </p>
-                                            <a href="https://wego.here.com/?map=28.50414,77.09755,18" target="_blank">Show on Map</a>
-                                            <p class="text">Contact: Srinivas Singh (+91-9899***217)</p>
-                                            <a href="#" class="btn btn-outline-primary btn-sm card-buttons" data-toggle="modal" data-target="#exampleModal">Edit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                   <% include partials/dashboard-grid.ejs %>
                 </div>
+
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Stock Location</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                        <div class="input-group">
-                            <span class="input-group-addon">Name</span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="e.g. Luxor Industries Ltd. (Navi Mumbai)">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Latitude</span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="e.g. ">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Longitude</span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="e.g. ">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Address</span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="Enter Address Here...">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Contact</span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="e.g. Srinivas Singh">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Phone</span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="e.g. +91-9899xxx217">
-                        </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
     </body>
 </html>

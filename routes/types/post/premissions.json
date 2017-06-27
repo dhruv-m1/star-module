@@ -16,7 +16,7 @@
         "collection": "Plants"
     },
     "inventory": {
-        "allow": false,
+        "allow": true,
         "collection": "Inventory"
     },
     "stock-receipt": {

@@ -73,3 +73,40 @@
         padding-left: 20px;
     }
  }
+
+  /*Dashboard Cards*/
+
+  @media (min-width: 768px) and (max-width: 991px) {
+
+    #infocards-directory h4{
+        font-size: 120%;
+    }
+    #infocards-directory .card-buttons{
+        margin-top: 7px;
+    }
+    #infocards-logs .card-buttons{
+        margin-top: 10px;
+    }
+    #infocards-about h4{
+        font-size: 1em;
+        font-weight: bold;
+    }
+ }
+
+  @media (max-width: 767px) {
+    .card{
+        border-radius: 0px;
+    }
+    #infocards-categories {
+        margin-top: 0px;
+    }
+    #infocards-directory{
+        margin-left: 0px;
+    }
+    .row{
+        margin-bottom: 0px;
+    }
+    .content-top{
+        border-top: #0747a6 solid 7px;
+    }
+}

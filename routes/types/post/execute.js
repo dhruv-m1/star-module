@@ -10,12 +10,13 @@ const validator = require('../validate');
 
 router.post("/:dataset/:skip/:limit" , function(req, res){
     var collection = validator.premissions(req.params.dataset, res, "post");
+    res.set('Content-Type', 'application/json');
     if(collection != null){
         db[collection].find(req.body).count(function (err, count) {
 
             db[collection].find(req.body).skip(parseInt(req.params.skip))
             .limit(parseInt(req.params.limit)).exec(function (err, result) {
-                result = `{"count":${count},"results":${result}}`;
+                result = `{"count":${count},"results":${JSON.stringify(result)}}`;
                 res.send(result);
             });
         });

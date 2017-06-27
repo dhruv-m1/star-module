@@ -1,16 +1,14 @@
 
 //NAVIGATION
 $(document).ready(function(){
-    Sidebar.getLocations();
+    sidebar.getLocations();
+    dashGrid.getSetData();
 });
 
 $(document).on('click','.location-choice',function(){
-    Sidebar.setLocation(this);
+    sidebar.setLocation(this);
 });
 
 $(document).on('click','.sidebar-toggle',function(){
-   Sidebar.displayToggle();
+   sidebar.displayToggle();
 });  
-$(window).resize(function() {
-    Sidebar.displayForceShow();
-});

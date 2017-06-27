@@ -33,23 +33,23 @@ module.exports.StockReceipt = mongoose.model('StockReceipt', new Schema({
     timestamp: String,
     productName: String,
     productId: String,
-    batchId: String,
-    origin: String,
-    destination: String
+    originId: Number,
+    destinationId: Number,
+    quantity: Number
 },{ collection: 'StockReceipt' }));
 
 module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
     timestamp: String,
     productName: String,
     productId: String,
-    origin: String,
-    destination: String
+    originId: Number,
+    destinationId: Number,
+    quantity: Number
 },{ collection: 'StockTransfer' }));
 
 module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
     name: String,
-    latitude: Number,
-    longitude: Number,
+    map_url: String,
     address: String,
     locationId: String,
     contact: String,
@@ -59,7 +59,7 @@ module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
 module.exports.Inventory = mongoose.model('Inventory', new Schema({
     productName: String,
     productId: String,
-    loaction: String,
+    locationId: Number,
     quantity: Number
 },{ collection: 'Inventory' }));
 
