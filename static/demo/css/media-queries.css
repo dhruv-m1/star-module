@@ -30,7 +30,7 @@
         display: block;
     }
     #sidebar-open{
-        display: block;
+        display: inline-block;
     }
  }
 
@@ -47,5 +47,29 @@
     }
     .nav a {
         font-size: 15px;
+    }
+ }
+
+ /*Page Heading*/
+
+ @media (max-width: 767px) {
+    #page-heading{
+        position: relative;
+        top: 0px;
+        left: 10px;
+        color: #172b4d;
+        margin-bottom: 5px;
+        font-size: smaller;
+    }
+
+    #page-heading h3{
+
+        font-size: 1.2rem;
+    }
+
+    .breadcrumb{
+        margin-bottom: 0;
+        background: transparent;
+        padding-left: 20px;
     }
  }

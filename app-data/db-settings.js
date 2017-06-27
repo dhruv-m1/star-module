@@ -48,6 +48,8 @@ module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
 
 module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
     name: String,
+    latitude: Number,
+    longitude: Number,
     address: String,
     locationId: String,
     contact: String,

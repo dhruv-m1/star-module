@@ -4,6 +4,21 @@
 html, body{
     overflow: hidden;
 }
+.row{
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+}
+.no-padding-x{
+    padding-left: 0;
+    padding-right: 0;
+    display: inline-table;
+}
+.scrollable{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+}
 /* Navigation*/
 #sidebar-heading{
     background: #0747a6;
@@ -83,8 +98,58 @@ html, body{
 }
 #sidebar-open{
     display: none;
+    color: black;
 }
 #location-choice-list{
     cursor: pointer;
     cursor: hand; 
 }
+
+/*Page Heading*/
+#page-heading{
+    position: relative;
+    top: 10px;
+    color: #172b4d;
+    margin-bottom: 21.5px;
+}
+
+.breadcrumb{
+    margin-bottom: 0;
+    background: transparent;
+    padding-left: 0;
+}
+
+/* Home Page Cards */
+#infocards{
+    width: 100%;
+}
+
+#infocards .card-buttons{
+    float: right;
+}
+
+#infocards-products {
+    margin-right: 7px;
+}
+
+#infocards-categories {
+    margin-top: 12px;
+}
+#infocards-directory{
+    height: 247px !important;
+    margin-left: 7px;
+}
+#infocards-directory .card-buttons{
+    margin-top: 10px;
+}
+#infocards-logs .card-buttons{
+    margin-top: 10px;
+}
+
+#infocards-logs {
+    margin-right: 7px;
+}
+#infocards-about {
+    height: 306.62px;
+}
+
