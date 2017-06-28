@@ -14,3 +14,7 @@ app.set('view engine', 'ejs');
 app.get('/demo', function(req, res){
     res.render('demo/index');
 })
+
+app.get('/demo/directory', function(req, res){
+    res.render('demo/directory');
+})

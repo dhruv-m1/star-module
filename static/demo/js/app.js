@@ -1,7 +1,7 @@
 
 //NAVIGATION
 $(document).ready(function(){
-    sidebar.getLocations();
+    sidebar.getLocations(false);
     dashGrid.getSetData();
 });
 

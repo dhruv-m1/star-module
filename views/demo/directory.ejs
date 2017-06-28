@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Dashboard - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Directory</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-11 col-md-11">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#depots-table" role="tab">Depots/Warehouses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#factories-table" role="tab">Factories</a>
+                                </li>
+                        </div>
+                    </div>
+
+                   
+                    <div class="row">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="depots-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                        <th>#</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">3</th>
+                                        <td colspan="2">Larry the Bird</td>
+                                        <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="factories-table" role="tabpanel">2</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>
