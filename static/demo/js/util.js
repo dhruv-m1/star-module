@@ -1,19 +1,19 @@
 //Written by Dhruv Malik
 
 const sidebar = {
-    getLocations: function(dashboard){
+    getLocations: function(){
         $.get( "/api/stock-locations/count", function(res) {
             $.get( `/api/stock-locations/0/${res.count}`, function(locations) {
                 //Setting to default
                 $("#locationName").html(locations[0].name);
                 $("#locationid").html(`ID: ${locations[0].locationId}`);
 
-                sidebar.saveLocation(locations[0].name, locations[0].locationId, dashboard);
-
                 locations.forEach(function(element) {
                     let layout = `<li class="list-group-item location-choice" locationid="${element.locationId}">${element.name}</li>`;
                     $( "#location-choice-list" ).append(layout);
                 }, this);
+
+                sidebar.saveLocation(locations[0].name, locations[0].locationId);
             });
         }); 
     },
@@ -24,15 +24,15 @@ const sidebar = {
 
         sidebar.saveLocation($(obj).text(), $(obj).attr("locationid"), true);
     },
-    saveLocation: function(name, id, dashboard) {
+    saveLocation: function(name, id) {
         if (typeof(Storage) !== "undefined") {
             sessionStorage.setItem("_StarModule_Loc_name", name);
             sessionStorage.setItem("_StarModule_Loc_id", id);
         } else {
-            alert("Error: Browser out of date.")
+            alert("Error: Browser out of date.");
         }
         
-        if(dashboard === true){dashGrid.getSetSpecificData();} // change to callback
+        //if(dashboard === true){} // change to callback
     },
     displayToggle: function() {
         $( "#sidebar" ).toggle("slow");
@@ -118,5 +118,29 @@ const dashGrid = {
             }
         });
 
+    }
+}
+
+const directory = {
+    stockLocationsCount :0,
+    stockLocationsDisplayed: 0,
+    getCount: function(dataset){
+        $.get( `/api/${dataset}/count`, function(res) {
+            directory.stockLocationsCount = res.count;
+        });
+    },
+    getAndAppendStockLocations: function(){
+        $.get( `/api/stock-locations/${directory.stockLocationsDisplayed}/${directory.stockLocationsDisplayed+5}`, function(res) {
+            $(res).each(function(index, location){
+                let html = `<tr>
+                    <th scope="row" class="hidden-xs-down">${location.locationId}</th>
+                    <td>${location.name}</td>
+                    <td><span class="hidden-xs-down">${location.address}<br></span> <a href="${location.map_url}" target="_blank">Show on Map</a></td>
+                    <td>${location.contact} (${location.phone})</td>
+                </tr>`;
+                $('#depots-table tbody').append(html);
+                directory.stockLocationsDisplayed += 5;
+            });
+        });
     }
 }
