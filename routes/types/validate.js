@@ -7,7 +7,6 @@ const fs = require('fs');
 
 module.exports.premissions = function (dataset, res, reqType){
     var premissions = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/premissions.json`));
-
     if (premissions[dataset].allow === true){
         return premissions[dataset].collection;
     }
@@ -24,7 +23,13 @@ module.exports.schemaValidate = function (collection, record) {
         
         try {
             if(attribute != "_id" && attribute != "__v"){
-                assert(typeof record[attribute] === specification.instance.toLowerCase());
+                var requiredType = specification.instance.toLowerCase();
+
+                if(requiredType === "array") {
+                    requiredType = "object";
+                }
+
+                assert(typeof record[attribute] === requiredType);
             }
             else if(attribute === "__v" && response === null){
                 response = true; 

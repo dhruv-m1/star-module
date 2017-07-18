@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Dashboard - Star Module Demo</title>
+        <title>Logs - Star Module Demo</title>
         <% include partials/universal-dependencies/external-css.ejs %>
     </head>
     
@@ -17,9 +17,9 @@
                         <header id="page-heading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Inventory Logs</li>
                             </ol>
-                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Directory</h3>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Logs</h3>
                         </header>
                     </div>
 
@@ -27,10 +27,10 @@
                         <div class="col-lg-11 col-md-11">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#depots-table" role="tab">Depots/Warehouses</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#receipts-table" role="tab">Reciept (Factory)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#factories-table" role="tab">Factories</a>
+                                    <a class="nav-link" data-toggle="tab" href="#transfers-table" role="tab">Transfer (In/Out Other)</a>
                                 </li>
                         </div>
                     </div>
@@ -38,28 +38,30 @@
                    
                     <div class="row">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="depots-table" role="tabpanel">
+                            <div class="tab-pane active" id="receipts-table" role="tabpanel">
                                 <table class="table table-hover" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th class="hidden-xs-down">ID</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Contact</th>
+                                            <th>Product</th>
+                                            <th>Factory</th>
+                                            <th>QTY.</th>
+                                            <th>Timestamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane" id="factories-table" role="tabpanel">
+                            <div class="tab-pane" id="transfers-table" role="tabpanel">
                                 <table class="table table-hover" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th class="hidden-xs-down">ID</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Contact</th>
+                                            <th>Product</th>
+                                            <th>Origin</th>
+                                            <th>QTY.</th>
+                                            <th>Timestamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>

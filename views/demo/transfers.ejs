@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Logs - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Transfers</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Transfers Wizard</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <center>
+                        <div class="card">
+                            <div class="card-header">Enter Details to Proceed</div>
+                            <div class="card-block">
+
+                                <form class="form" action="/demo/transfers/register">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon">Location</div>
+                                    <input class="form-control" type="text" name="origin" id="transfer-origin" value="" readonly required><br/>
+                                </div><br/>
+
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon">Article</div>
+                                    <input type="text" pattern="[0-9]{13}" maxlength="13" class="form-control" name="productid" placeholder="Product ID (13 Digit)" required>
+                                </div><br/>
+
+                                <button type="submit" class="btn btn-primary" id="Transfer-Start">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        </center>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>

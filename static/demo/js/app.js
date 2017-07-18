@@ -37,10 +37,20 @@ if(window.location.pathname.replace(/\//g, '') === 'demo'){
 if(window.location.pathname.replace(/\//g, '') === 'demodirectory'){
 
     $.when($(document).ready).then(
-        $.when(directory.getCount()).then(directory.getAndAppendStockLocations())
+        $.when(directory.getCount('stock-locations')).then(directory.getAndAppendStockLocations()),
+        $.when(directory.getCount('plants')).then(directory.getAndAppendFactories())
     );
 
-    
+}
 
+if(window.location.pathname.replace(/\//g, '') === 'demologs'){
 
+    $.when($(document).ready).then(
+        $.when(logs.getCount('stock-receipt')).then(logs.getAndAppendStockReceipts()),
+        $.when(logs.getCount('stock-transfer')).then(logs.getAndAppendTransfers())
+    );
+
+}
+if(window.location.pathname.replace(/\//g, '') === 'demotransfers'){
+    $('#transfer-origin').attr('value', sessionStorage.getItem("_StarModule_Loc_id"));
 }

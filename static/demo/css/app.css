@@ -155,3 +155,17 @@ html, body{
     height: 306.62px;
 }
 
+/*Directory and logs*/
+.tab-content{
+    width: 100%;
+} 
+
+/*Transfers*/
+
+center {
+  margin-left: auto ;
+  margin-right: auto ;
+}
+center .card-header {
+    text-align: left;
+}

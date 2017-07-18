@@ -124,22 +124,90 @@ const dashGrid = {
 const directory = {
     stockLocationsCount :0,
     stockLocationsDisplayed: 0,
+    factoriesCount :0,
+    factoriesDisplayed: 0,
     getCount: function(dataset){
         $.get( `/api/${dataset}/count`, function(res) {
-            directory.stockLocationsCount = res.count;
+            if(dataset === "stock-locations"){
+                directory.stockLocationsCount = res.count;
+            }
+            else if(dataset === "plants"){
+                directory.factoriesCount = res.count;
+            }
         });
     },
     getAndAppendStockLocations: function(){
         $.get( `/api/stock-locations/${directory.stockLocationsDisplayed}/${directory.stockLocationsDisplayed+5}`, function(res) {
             $(res).each(function(index, location){
                 let html = `<tr>
-                    <th scope="row" class="hidden-xs-down">${location.locationId}</th>
+                    <th scope="row" class="hidden-xs-down">${location._id.match(new RegExp('.{1,5}', 'g')).join(" ")}</th>
                     <td>${location.name}</td>
                     <td><span class="hidden-xs-down">${location.address}<br></span> <a href="${location.map_url}" target="_blank">Show on Map</a></td>
                     <td>${location.contact} (${location.phone})</td>
                 </tr>`;
                 $('#depots-table tbody').append(html);
                 directory.stockLocationsDisplayed += 5;
+            });
+        });
+    },
+    getAndAppendFactories: function(){
+        $.get( `/api/plants/${directory.factoriesDisplayed}/${directory.factoriesDisplayed+5}`, function(res) {
+            $(res).each(function(index, location){
+                let html = `<tr>
+                    <th scope="row" class="hidden-xs-down">${location._id}</th>
+                    <td>${location.name} (${location.owner})</td>
+                    <td><span class="hidden-xs-down">${location.address}<br></span> <a href="${location.map_url}" target="_blank">Show on Map</a></td>
+                    <td>${location.contact} (${location.phone})</td>
+                </tr>`;
+                $('#factories-table tbody').append(html);
+                directory.factoriesDisplayed += 5;
+            });
+        });
+    }
+}
+
+const logs = {
+    recieptsCount :0,
+    recieptsDisplayed: 0,
+    transfersCount :0,
+    transfersDisplayed: 0,
+    getCount: function(dataset){
+        $.get( `/api/${dataset}/count`, function(res) {
+            if(dataset === "stock-receipt"){
+                logs.recieptsCount = res.count;
+            }
+            else if(dataset === "plants"){
+                logs.transfersCount = res.count;
+            }
+        });
+    },
+    getAndAppendStockReceipts: function(){
+        $.get( `/api/stock-receipt/${logs.recieptsDisplayed}/${logs.recieptsDisplayed+5}`, function(res) {
+            $(res).each(function(index, item){
+                let html = `<tr>
+                    <td scope="row" class="hidden-xs-down">${item._id}</td>
+                    <td>${item.productName}</td>
+                    <td><span class="">${item.originName}</span></td>
+                    <td>${item.quantity}</td>\
+                    <td scope="row">${item.timestamp}</td>
+                </tr>`;
+                $('#receipts-table tbody').append(html);
+                logs.recieptsDisplayed += 5;
+            });
+        });
+    },
+    getAndAppendTransfers: function(){
+        $.get( `/api/stock-transfer/${logs.transfersDisplayed}/${logs.transfersDisplayed+5}`, function(res) {
+            $(res).each(function(index, item){
+                let html = `<tr>
+                    <td scope="row" class="hidden-xs-down">${item._id}</td>
+                    <td>${item.productName}</td>
+                    <td><span class="">${item.originName}</span></td>
+                    <td>${item.quantity}</td>\
+                    <td scope="row">${item.timestamp}</td>
+                </tr>`;
+                $('#transfers-table tbody').append(html);
+                logs.transfersDisplayed += 5;
             });
         });
     }

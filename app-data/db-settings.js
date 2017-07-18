@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+var shortid = require('mongoose-shortid-nodeps');
 mongoose.Promise = global.Promise;
 
 console.log('>> Establishing Database connection.');
@@ -30,15 +31,28 @@ module.exports.CategoryList = mongoose.model('CategoryList', new Schema({
 },{ collection: 'CategoryList' }));
 
 module.exports.StockReceipt = mongoose.model('StockReceipt', new Schema({
+    _id: {
+        type: shortid,
+        len: 6,
+        alphabet: 'STOCKRECP1234567890', //Base will trigger is this character set is not sufficient.
+        base: 64
+    },
     timestamp: String,
     productName: String,
     productId: String,
+    originName: String,
     originId: Number,
     destinationId: Number,
     quantity: Number
 },{ collection: 'StockReceipt' }));
 
 module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
+    _id: {
+        type: shortid,
+        len: 6,
+        alphabet: 'STOCKRANFE1234567890', //Base will trigger is this character set is not sufficient.
+        base: 64
+    },
     timestamp: String,
     productName: String,
     productId: String,
@@ -48,6 +62,12 @@ module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
 },{ collection: 'StockTransfer' }));
 
 module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
+    _id: {
+        type: shortid,
+        len: 9,
+        alphabet: 'STOCKLCAIN1234567890', //Base will trigger is this character set is not sufficient.
+        base: 64
+    },
     name: String,
     map_url: String,
     address: String,
@@ -60,7 +80,9 @@ module.exports.Inventory = mongoose.model('Inventory', new Schema({
     productName: String,
     productId: String,
     locationId: Number,
-    quantity: Number
+    quantity: Number,
+    batches: Array,
+    batchQuantity: Array
 },{ collection: 'Inventory' }));
 
 module.exports.Plants = mongoose.model('Plants', new Schema({

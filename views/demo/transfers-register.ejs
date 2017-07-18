@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Logs - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Transfers</li>
+                                <li class="breadcrumb-item active">Register (Selection)</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Transfers Register</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Batch</th>
+                                        <th>QTY.</th>
+                                        <th>Avail. QTY</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% data.batches.forEach(function(item, index){ %>
+                                        <tr>
+                                            <td><%= item %></td>
+                                            <td><input type="number" class="form-control" style="width: 75px" min="0" max="10" placeholder="0"></td>
+                                            <td><%= data.batchQuantity[index] %></td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Additional Details
+                                </div>
+                                <div class="card-block">
+                                    <form class="form-inline">
+                                        <label class="mr-sm-2" for="inlineFormCustomSelect">Destination</label>
+                                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                            <option selected>Choose...</option>
+                                            <option value="outbound" id="transfers-id-optional">Sale/Outbound</option>
+                                            <option value="transfer">Warehouse</option>
+                                            <option value="plant">Factory</option>
+                                        </select>
+
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <div class="input-group-addon">ID</div>
+                                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="(Required)">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>
