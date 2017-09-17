@@ -93,3 +93,12 @@ module.exports.Plants = mongoose.model('Plants', new Schema({
     contact: String,
     phone: Number
 },{ collection: 'plants' }));
+
+module.exports.Customers = mongoose.model('Customers', new Schema({
+    name: String,
+    email: String,
+    landline: Number,
+    mobile: Number,
+    created: Date,
+    updated: Date
+},{ collection: 'customers' }));

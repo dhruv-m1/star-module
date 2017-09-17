@@ -54,3 +54,15 @@ if(window.location.pathname.replace(/\//g, '') === 'demologs'){
 if(window.location.pathname.replace(/\//g, '') === 'demotransfers'){
     $('#transfer-origin').attr('value', sessionStorage.getItem("_StarModule_Loc_id"));
 }
+
+if(window.location.pathname.replace(/\//g, '') === 'demoscan'){
+     $('#reader').html5_qrcode(function(data){
+ 		 console.log(data);
+ 	},
+ 	function(error){
+		console.log(error);
+	}, function(videoError){
+		//the video stream could be opened
+	}
+);
+}

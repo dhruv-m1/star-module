@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Logs - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Inventory</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Inventory</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7 col-sm-12 search">
+                        <div class="card">
+                            <div class="card-block">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="ID/Name">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="tab-content">
+                            <div id="receipts-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="hidden-xs-down">ID</th>
+                                            <th>Product</th>
+                                            <th>QTY.</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td scope="row" class="hidden-xs-down">1235678900111</td>
+                                        <td>Marker</td>
+                                        <td>117</td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary btn-sm">Transfer</button>
+                                            <button type="button" class="btn btn-secondary btn-sm">View</button>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>

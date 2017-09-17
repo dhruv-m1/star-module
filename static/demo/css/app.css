@@ -169,3 +169,9 @@ center {
 center .card-header {
     text-align: left;
 }
+
+/*Search*/
+.search {
+    position: relative;
+    right: -57%;
+}

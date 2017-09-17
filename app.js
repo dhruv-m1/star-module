@@ -29,3 +29,9 @@ app.get('/demo/transfers/register', function(req, res){
         res.render('demo/transfers-register', {data: result});
     });
 })
+app.get('/demo/inventory', function(req, res){
+    res.render('demo/inventory');
+})
+app.get('/demo/scan', function(req, res){
+    res.render('demo/scan');
+})
