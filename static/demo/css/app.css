@@ -177,36 +177,28 @@ center .card-header {
 }
 
 /*Scanner*/
-#scan-all{
-    margin-left: 3%;
-    width: 35%;
-    overflow-x: hidden;
+#scan-table{
+    height: 30%;
+}
+#scan-all {
+	width: 96%;
+	height: 100%;
+	overflow-x: hidden;
 }
 #scan-all .card-body{
     overflow-y: scroll;
     padding-left: 15px;
     padding-right: 10px;
 }
-#scan-success{
-    width: 45%;
-    overflow-x: hidden;
-    height: 50%;
-}
-#scan-success .card-body{
-    overflow-y: scroll;
-    padding-left: 15px;
-    padding-right: 10px;
-}
-#scanner-tables{
-    height: 50%;
-}
-#scan-reject{
-    width: 45%;
-    overflow-x: hidden;
-    height: 50%;
-}
-#scan-reject .card-body{
-    overflow-y: scroll;
-    padding-left: 15px;
-    padding-right: 10px;
+
+#QR-Scanner {
+	width: 100vw;
+	height: 50vh;
+	object-fit: cover;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	z-index: -1;
+    padding-right: 28%;
+    transform: scaleX(1) !important;
 }

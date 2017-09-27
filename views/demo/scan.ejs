@@ -24,10 +24,15 @@
                     </div>
 
                     <div class="row">
-                        <video id="QR-Scanner"></video>
+                        <div id="scan-wrapper">
+                            <video id="QR-Scanner"></video>
+                        </div>
                         <audio id="audio">
                             <source src="/static/demo/sounds/Scan.mp3" type="audio/mpeg">
                         </audio>
+                    </div>
+
+                    <div class="row" id="scan-table">
                         <div class="card" id="scan-all">
                             <div class="card-header">
                                 All Scans
@@ -38,49 +43,8 @@
                                         <tr>
                                             <th>Log ID</th>
                                             <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row" id="scanner-tables">
-                        <div class="card" id="scan-success">
-                            <div class="card-header text-white bg-success">
-                                Success
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-sm" id="">
-                                    <thead>
-                                        <tr>
-                                            <th>Log ID</th>
                                             <th>Product</th>
-                                            <th>Qty.</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="card" id="scan-reject">
-                            <div class="card-header text-white bg-danger">
-                                Rejected
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-sm" id="">
-                                    <thead>
-                                        <tr>
-                                            <th>Log ID</th>
-                                            <th>Reason</th>
+                                            <th>QTY.</th>
                                         </tr>
                                     </thead>
                                     <tbody>

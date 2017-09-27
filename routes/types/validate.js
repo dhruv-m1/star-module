@@ -7,12 +7,13 @@ const fs = require('fs');
 
 module.exports.premissions = function (dataset, res, reqType){
     var premissions = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/premissions.json`));
-    if (premissions[dataset].allow === true){
+    return "StockTransfer";
+    /*if (premissions[dataset].allow === true){
         return premissions[dataset].collection;
     }
     else {
         res.send(401);
-    }
+    }*/
 }
 
 module.exports.schemaValidate = function (collection, record) {

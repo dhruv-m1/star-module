@@ -58,7 +58,10 @@ module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
     productId: String,
     originId: String,
     destinationId: String,
-    quantity: Number
+    quantity: Number,
+    status: String,
+    batches: Array,
+    batchQuantity: Array
 },{ collection: 'StockTransfer' }));
 
 module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
