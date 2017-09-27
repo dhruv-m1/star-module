@@ -12,31 +12,16 @@
         <section id="sidebar-location">
             <section>
                 <span class="glyphicon glyphicon-map-marker"></span>
-                <span id="locationName">(Loading...)</span>
-                <br><small id="locationid"> </small>
+                <span id="locationName"><%= loc.name %></span>
+                <br><small id="locationid">ID: <span><%= loc._id %></span></small>
             </section>
-            <p>
-                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Change Location
-                </button>
-            </p>
-            <section class="collapse" id="collapseExample">
-                <div class="card">
-                    <div class="card-header">
-                        <strong>Select Stock Location</strong>
-                    </div>
-                    <div class="class-block">
-                        <ul class="list-group list-group-flush" id="location-choice-list">
-                        </ul>
-                    </div>
-                </div>
-            </section>
+
         </section>
         <nav class="nav flex-column">
-            <a class="nav-link active" href="/demo"><span class="glyphicon glyphicon-th"></span>Dashboard</a>
-            <a class="nav-link" href="#"><span class="glyphicon glyphicon-qrcode"></span>Scan items</a>
-            <a class="nav-link" href="#"><span class="glyphicon glyphicon-transfer"></span>Transfer</a>
-            <a class="nav-link" href="#"><span class="glyphicon glyphicon-search"></span>Inventory</a>
+            <a class="nav-link" href="/demo"><span class="glyphicon glyphicon-th"></span>Dashboard</a>
+            <a class="nav-link" href="/demo/scan"><span class="glyphicon glyphicon-qrcode"></span>Scan</a>
+            <a class="nav-link" href="/demo/transfers"><span class="glyphicon glyphicon-transfer"></span>Transfer Out</a>
+            <a class="nav-link" href="/demo/inventory"><span class="glyphicon glyphicon-search"></span>Inventory</a>
             <a class="nav-link" href="/demo/logs"><span class="glyphicon glyphicon-duplicate"></span>Logs</a>
             <a class="nav-link" href="/demo/directory"><span class="glyphicon glyphicon-tasks"></span>Directory</a>
         </nav>

@@ -42,5 +42,22 @@ router.post("/:dataset/" , function(req, res){
     }
 });
 
+router.post("/receive" , function(req, res){
+    var collection = validator.premissions(req.params.dataset, res, "post");
+    res.set('Content-Type', 'application/json');
+    if(collection != null){
+        var validationResult = validator.schemaValidate(collection, req.body);
 
+        if(validationResult === true){
+            var Record = new db[collection](req.body);
+            Record.save(function (err) {
+                res.send(`{"status":"successful"}`);
+            });
+        }
+        else {
+            res.send(validationResult);
+        }
+
+    }
+});
 module.exports = router;

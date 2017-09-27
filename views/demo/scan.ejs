@@ -17,14 +17,78 @@
                         <header id="page-heading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active">Inventory</li>
+                                <li class="breadcrumb-item active">Scan</li>
                             </ol>
-                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Scanner Debug</h3>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Scanner</h3>
                         </header>
                     </div>
 
                     <div class="row">
-                        <div id="reader" style="width:300px;height:250px">
+                        <video id="QR-Scanner"></video>
+                        <audio id="audio">
+                            <source src="/static/demo/sounds/Scan.mp3" type="audio/mpeg">
+                        </audio>
+                        <div class="card" id="scan-all">
+                            <div class="card-header">
+                                All Scans
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm" id="all-log">
+                                    <thead>
+                                        <tr>
+                                            <th>Log ID</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="scanner-tables">
+                        <div class="card" id="scan-success">
+                            <div class="card-header text-white bg-success">
+                                Success
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm" id="">
+                                    <thead>
+                                        <tr>
+                                            <th>Log ID</th>
+                                            <th>Product</th>
+                                            <th>Qty.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card" id="scan-reject">
+                            <div class="card-header text-white bg-danger">
+                                Rejected
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm" id="">
+                                    <thead>
+                                        <tr>
+                                            <th>Log ID</th>
+                                            <th>Reason</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -34,5 +98,6 @@
 
         </div>
         <% include partials/universal-dependencies/external-js.ejs %>
+        <script src="/static/demo/js/scanner.js"></script>
     </body>
 </html>

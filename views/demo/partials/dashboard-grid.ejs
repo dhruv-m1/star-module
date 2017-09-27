@@ -10,7 +10,7 @@
                 <h5 class="card-header">Products</h5>
 
                 <section class="card-block">
-                    <h1 class="card-title">...</h1>
+                    <h1 class="card-title"><%= result.products %></h1>
                     <p class="card-text">So many products! Explore the catelog and be sure that you're always stocked up.</p>
                     <a href="#" class="btn btn-outline-primary hidden-md-down card-buttons">Explore Products & Inventory</a>
                     <a href="#" class="btn btn-outline-primary hidden-lg-up btn-sm card-buttons">Explore Products & Inventory</a>
@@ -27,7 +27,7 @@
 
                 <section class="card-block">
                     <h4 class="card-text">
-                        <span>...</span> 
+                        <span><%= result.inventory %></span> 
                         <small>(In-Stock)</small>
                     </h4>
                 </section>
@@ -38,7 +38,7 @@
                 
                 <section class="card-block">
                     <h4 class="card-text">
-                        <span>...</span>
+                        <span><%= result.categories %></span>
                         <small>(Total)</small>
                     </h4>
                 </section>
@@ -57,13 +57,13 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <h4>
-                                <span id="dash-grid-depots">...</span> 
+                                <span id="dash-grid-depots"><%= result.directory.depots %></span> 
                                 <small>Depots</small>
                             </h4>
                         </li>
                         <li class="list-group-item">
                             <h4>
-                                <span id="dash-grid-factories">...</span>
+                                <span id="dash-grid-factories"><%= result.directory.factories %></span>
                                 <small>Factories</small>
                             </h4>
                         </li>
@@ -90,19 +90,19 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <h4>
-                                <span id="dash-grid-transferins">...</span> 
+                                <span id="dash-grid-transferins"><%= result.logs.in %></span> 
                                 <small>Transfer Ins</small>
                             </h4>
                         </li>
                         <li class="list-group-item">
                             <h4>
-                                <span id="dash-grid-transferouts">...</span> 
+                                <span id="dash-grid-transferouts"><%= result.logs.out %></span> 
                                 <small>Transfer Outs</small>
                             </h4>
                         </li>
                         <li class="list-group-item">
                             <h4>
-                                <span id="dash-grid-receipts">...</span> 
+                                <span id="dash-grid-receipts"><%= result.logs.receipt %></span> 
                                 <small>Receipts</small>
                             </h4>
                         </li>
@@ -122,10 +122,10 @@
                 <p class="card-header">About Us</p>
 
                 <section class="card-block">
-                    <h4 class="card-title">...</h4>
-                    <p class="text"></p>
-                    <a href="" target="_blank"></a>
-                    <p class="text"></p>
+                    <h4 class="card-title"><%= result.about.name %></h4>
+                    <p class="text"><%= result.about.address %></p>
+                    <a href="<%= result.about.map_url %>" target="_blank">Show on Map</a>
+                    <p class="text">Contact: <%= result.about.contact %> (<%= result.about.phone %>)</p>
                 </section>
 
             </section>

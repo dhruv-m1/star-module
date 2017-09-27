@@ -6,7 +6,7 @@ var shortid = require('mongoose-shortid-nodeps');
 mongoose.Promise = global.Promise;
 
 console.log('>> Establishing Database connection.');
-mongoose.connect("mongodb://starbackend:star123!@ds131492.mlab.com:31492/star_module_testing");
+mongoose.connect("mongodb://localhost:27017/star_module");
 //Warning may be seen on console due to Mongoose issue #5304 on GitHub. This can safely be ignored.
 mongoose.connection.once('open', function(){
     console.log('>> Connected.');
@@ -41,8 +41,8 @@ module.exports.StockReceipt = mongoose.model('StockReceipt', new Schema({
     productName: String,
     productId: String,
     originName: String,
-    originId: Number,
-    destinationId: Number,
+    originId: String,
+    destinationId: String,
     quantity: Number
 },{ collection: 'StockReceipt' }));
 
@@ -56,8 +56,8 @@ module.exports.StockTransfer = mongoose.model('StockTransfer', new Schema({
     timestamp: String,
     productName: String,
     productId: String,
-    originId: Number,
-    destinationId: Number,
+    originId: String,
+    destinationId: String,
     quantity: Number
 },{ collection: 'StockTransfer' }));
 
@@ -79,7 +79,7 @@ module.exports.StockLocations = mongoose.model('StockLocations', new Schema({
 module.exports.Inventory = mongoose.model('Inventory', new Schema({
     productName: String,
     productId: String,
-    locationId: Number,
+    locationId: String,
     quantity: Number,
     batches: Array,
     batchQuantity: Array
@@ -102,3 +102,6 @@ module.exports.Customers = mongoose.model('Customers', new Schema({
     created: Date,
     updated: Date
 },{ collection: 'customers' }));
+module.exports._sessions = mongoose.model('_sessions', new Schema({
+    currentLocation: String,
+},{ collection: '_sessions' }));

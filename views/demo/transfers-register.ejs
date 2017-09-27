@@ -38,7 +38,7 @@
                                     <% data.batches.forEach(function(item, index){ %>
                                         <tr>
                                             <td><%= item %></td>
-                                            <td><input type="number" class="form-control" style="width: 75px" min="0" max="10" placeholder="0"></td>
+                                            <td><input type="number" class="form-control" style="width: 105px" min="0" max="<%= data.batchQuantity[index] %>" placeholder="0"></td>
                                             <td><%= data.batchQuantity[index] %></td>
                                         </tr>
                                     <% }) %>
