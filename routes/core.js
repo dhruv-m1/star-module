@@ -7,7 +7,5 @@ router.use(bodyParser.json());
 
 router.use('/', require('./types/post/execute'));
 router.use('/', require('./types/get/execute'));
-router.use('/', require('./types/put/execute'));
-router.use('/', require('./types/delete/execute'));
 
 module.exports = router;

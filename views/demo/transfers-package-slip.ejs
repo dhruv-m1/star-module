@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Printable Packing Slip - Star Module</title>
+    </head>
+    <body style="font-family: consolas;">
+        <center>
+            <header>
+                <p style="padding: 7px;">TRANSFER (Packing Slip)</p>
+            </header>
+            <img height="150" width="150" src='http://api.qrserver.com/v1/create-qr-code/?data=<%= image %>&size=150x150'/>
+            <h2><b><%= data._id %></b></h2>
+            <h3><b>Contains <%= data.quantity %> of <%= data.productName %></b></h3>
+            <h5><b>To: <%= location.name %>,<br> <%= location.address %>,<br> Phone: <%= location.phone %></b></h5>
+            <footer>
+                <p style="padding: 7px;"><i>Origin: <%= data.originId %> Destination: <%= data.destinationId %></i></p>
+            </footer>
+        </center>
+        <script>
+            window.print();
+        </script>
+    </body>
+</html>

@@ -34,11 +34,11 @@
                                         <th>Avail. QTY</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody batches="<%= data.batches %>">
                                     <% data.batches.forEach(function(item, index){ %>
                                         <tr>
                                             <td><%= item %></td>
-                                            <td><input type="number" class="form-control" style="width: 105px" min="0" max="<%= data.batchQuantity[index] %>" placeholder="0"></td>
+                                            <td><input id="<%= item %>" type="number" class="form-control" style="width: 105px" min="0" max="<%= data.batchQuantity[index] %>" placeholder="0"></td>
                                             <td><%= data.batchQuantity[index] %></td>
                                         </tr>
                                     <% }) %>
@@ -52,14 +52,14 @@
                                     Additional Details
                                 </div>
                                 <div class="card-block">
-                                    <form class="form-inline">
+                                    <form class="form-inline" onsubmit="return transfers.register();">
 
                                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                             <div class="input-group-addon">Destination Warehouse (ID)</div>
-                                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g. 5CS31029T">
+                                            <input type="text" class="form-control" id="destinationId" placeholder="e.g. 5CS31029T" required>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary" id="Transfers-Confirm">Submit</button>
                                     </form>
                                 </div>
                             </div>

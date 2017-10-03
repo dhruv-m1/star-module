@@ -1,126 +1,5 @@
 //Written by Dhruv Malik
 
-const sidebar = {
-    getLocations: function(){
-        $.get( "/api/stock-locations/count", function(res) {
-            $.get( `/api/stock-locations/0/${res.count}`, function(locations) {
-                //Setting to default
-                $("#locationName").html(locations[0].name);
-                $("#locationid").html(`ID: ${locations[0].locationId}`);
-
-                locations.forEach(function(element) {
-                    let layout = `<li class="list-group-item location-choice" locationid="${element.locationId}">${element.name}</li>`;
-                    $( "#location-choice-list" ).append(layout);
-                }, this);
-
-                sidebar.saveLocation(locations[0].name, locations[0].locationId);
-            });
-        }); 
-    },
-
-    setLocation: function(obj) {
-        $("#locationName").html($(obj).text());
-        $("#locationid").html(`ID: ${$(obj).attr("locationid")}`);
-
-        sidebar.saveLocation($(obj).text(), $(obj).attr("locationid"), true);
-    },
-    saveLocation: function(name, id) {
-        if (typeof(Storage) !== "undefined") {
-            sessionStorage.setItem("_StarModule_Loc_name", name);
-            sessionStorage.setItem("_StarModule_Loc_id", id);
-        } else {
-            alert("Error: Browser out of date.");
-        }
-        
-        //if(dashboard === true){} // change to callback
-    },
-    displayToggle: function() {
-        $( "#sidebar" ).toggle("slow");
-    }
-
-}
-
-const dashGrid = {
-    getSetData: function(){
-        $.get( "/api/products/count", function(res) {
-            $("#infocards-products .card-title").html(res.count);
-        }); 
-        $.get( "/api/categories/count", function(res) {
-            $("#infocards-categories .card-text span").html(res.count);
-        });
-        $.get( "/api/stock-locations/count", function(res) {
-            $("#dash-grid-depots").html(res.count);
-        }); 
-        $.get( "/api/plants/count", function(res) {
-            $("#dash-grid-factories").html(res.count);
-        }); 
-    },
-    getSetSpecificData: function(){
-        let loc_id = parseInt(sessionStorage.getItem("_StarModule_Loc_id"));
-
-        $.ajax({
-            url:"/api/inventory/0/1",
-            type:"POST",
-            data: JSON.stringify({ "locationId": loc_id }),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(res){
-                $("#infocards-inventory .card-text span").html(res.count);
-            }
-        });
-
-        
-        $.ajax({
-            url:"/api/stock-transfer/0/1",
-            type:"POST",
-            data: JSON.stringify({ "destinationId": loc_id }),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(res){
-                $("#dash-grid-transferins").html(res.count);
-            }
-        });
-
-        $.ajax({
-            url:"/api/stock-transfer/0/1",
-            type:"POST",
-            data: JSON.stringify({ "originId": loc_id }),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(res){
-                $("#dash-grid-transferouts").html(res.count);
-            }
-        });
-
-        $.ajax({
-            url:"/api/stock-receipt/0/1",
-            type:"POST",
-            data: JSON.stringify({ "destinationId": loc_id }),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(res){
-                $("#dash-grid-receipts").html(res.count);
-            }
-        });
-        $.ajax({
-            url:"/api/stock-locations/0/1",
-            type:"POST",
-            data: JSON.stringify({ "locationId": loc_id.toString() }),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(res){
-                $("#infocards-about .card-block").html(`
-                    <h4 class="card-title">${res.results[0].name}</h4>
-                    <p class="text">${res.results[0].address}</p>
-                    <a href="${res.results[0].map_url}" target="_blank">Show on Map</a>
-                    <p class="text">Contact: ${res.results[0].contact} (${res.results[0].phone})</p>
-                `);
-            }
-        });
-
-    }
-}
-
 const directory = {
     stockLocationsCount :0,
     stockLocationsDisplayed: 0,
@@ -210,5 +89,154 @@ const logs = {
                 logs.transfersDisplayed += 5;
             });
         });
+    }
+}
+
+const inventory = {
+    appendToTable: function(res){
+        res.forEach(function(item, index){
+            $("tbody").append(`<tr scope="row">
+                                    <td class="hidden-xs-down">${res[index].productId}</td>
+                                    <td>${ res[index].productName }</td>
+                                    <td>${ res[index].quantity }</td>
+                                <td>
+                                    <a href="/demo/transfers/register?origin=${  $('#locationid span').html() }&productid=${res[index].productId}"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
+                                </td>
+                                </tr>`);
+        });
+    }
+}
+
+const transfers = {
+
+    register: function(){
+
+        if(transfers.getParam('origin') ===  $("#destinationId").val()){
+            alert("Cannot Transfer to Origin");
+        }else{
+            let count = 0;
+            let request_batches = [];
+            let request_batchQuantity = [];
+            let available_batches = $('tbody').attr('batches').split(',');
+
+
+            while(count < available_batches.length){
+                
+                if($(`#${available_batches[count]}`).val() != 0){
+
+                    request_batches.push(available_batches[count]);
+                    request_batchQuantity.push($(`#${available_batches[count]}`).val());
+                }
+                count += 1;
+            }
+
+            let request = {
+                productId: `${transfers.getParam('productid')}`,
+                originId: `${transfers.getParam('origin')}`,
+                destinationId: $("#destinationId").val(),
+                batches: request_batches,
+                batchQuantity: request_batchQuantity
+
+            }
+
+            $.ajax({
+                url:"/api/send",
+                type:"POST",
+                data: JSON.stringify(request),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(res){
+                    if(res.status === 'Success'){
+                        let slip = window.open("/demo/transfers/print/packingslip/"+res.code, '_blank');
+                        slip.focus();
+                        window.location = "/demo/transfers/";
+                    }else{
+                        alert(res.status);
+                    }
+                }
+            });
+        }
+
+        return false;
+            
+    },
+    getParam: function(name){
+        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+    }
+
+}
+
+const universal = {
+    getMore: function(){
+        $('.ShowMore').attr('disabled', 'true');
+        $('.ShowMore').html("Working on it...");
+
+        let collection = $('.ShowMore').attr('dataset');
+        let total = parseInt($('tbody').attr('count'));
+        let showing = parseInt($('tbody').attr('showing'));
+
+         $.ajax({
+            url:`/api/${collection}/${showing}/10`,
+            type:"GET",
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            success: function(res){
+                if(collection === 'Inventory'){
+                    inventory.appendToTable(res);
+                }
+
+                showing += res.length;
+                $('tbody').attr('showing', showing);
+                if(total === showing){
+                    $('.ShowMore').attr('disabled', 'true');
+                    $('.ShowMore').html("That's All :)");
+                }else{
+                    $('.ShowMore').removeAttr("disabled");
+                    $('.ShowMore').html("Show More");
+                }
+            }
+        });
+    },
+    search: function(additionFactor){
+        
+        $('.ShowMore').attr('disabled', 'true');
+        $('.ShowMore').attr('search', 'true');
+        $('.ShowMore').html("Working on it...");
+
+        let selection = $('.search-select').attr('correspondence');
+        let keyword = {field: selection, query: $('#search-keyword').val()}
+        let collection = $('.ShowMore').attr('dataset');
+        
+        let showing = 0;
+        showing += additionFactor;
+
+        if(additionFactor === 0){
+            $('tbody').html('');
+        }
+
+        if(keyword.query === ''){
+            window.location.reload(true);
+        }
+
+        $.ajax({
+            url:`/api/${collection}/${showing}/10`,
+            type:"POST",
+            data: JSON.stringify(keyword),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            success: function(res){
+                if(res.length === 0){
+                    $('.ShowMore').html("Nothing to display :)");
+                }else{
+                    $('.ShowMore').removeAttr("disabled");
+                    $('.ShowMore').html("Show More");
+                }
+                if(collection === 'Inventory'){
+                    inventory.appendToTable(res);
+                }
+            }
+        });
+
     }
 }

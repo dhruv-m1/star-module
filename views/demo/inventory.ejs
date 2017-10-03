@@ -25,17 +25,19 @@
 
                     <div class="row">
                         <div class="col-lg-5 col-md-7 col-sm-12 search">
-                        <div class="card">
-                            <div class="card-block">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="ID/Name">
-                                        <div class="input-group-btn">
-                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="input-group">
+                                <button type="button" correspondence="productName" class="btn btn-secondary dropdown-toggle search-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Name
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item search-option" correspondence="productName">Name</a>
+                                    <a class="dropdown-item search-option" correspondence="productId">ID</a>
+                                </div>
+                                <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div class="row">
@@ -50,16 +52,22 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <td scope="row" class="hidden-xs-down">1235678900111</td>
-                                        <td>Marker</td>
-                                        <td>117</td>
+                                    <tbody count="<%= resultCount %>" showing="<%= results.length %>">
+                                        <% results.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= results[index].productId %></td>
+                                            <td><%= results[index].productName %></td>
+                                            <td><%= results[index].quantity %></td>
                                         <td>
-                                            <button type="button" class="btn btn-secondary btn-sm">Transfer</button>
-                                            <button type="button" class="btn btn-secondary btn-sm">View</button>
+                                            <a href="/demo/transfers/register?origin=<%= loc._id %>&productid=<%= results[index].productId %>"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
                                         </td>
+                                        </tr>
+                                    <% }) %>
                                     </tbody>
                                 </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="Inventory" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
                             </div>
                         </div>
                     </div>

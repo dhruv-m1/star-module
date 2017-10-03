@@ -29,3 +29,8 @@ const sidebarStyle = {
         $( "#sidebar" ).show("slow");
     }
 }
+
+$('.search-option').click(function(){
+    $('.search-select').html($(this).html());
+    $('.search-select').attr('correspondence',$(this).attr('correspondence'));
+})

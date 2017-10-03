@@ -86,9 +86,60 @@ module.exports.setConnection = (res, sessionid) =>{
 
 module.exports.getTransferData = (location, article) => {
     return new Promise((resolve, reject) => {
-        typicalDBRead('Inventory', {'locationId': location}, {}, false).then(function(result){
-            console.log(location);
+        typicalDBRead('Inventory', {'locationId': location, 'productId': article}, {}, false).then(function(result){
             resolve(result[0]);
         });
     });
+}
+module.exports.getTransferConfirmation = (logid) => {
+    return new Promise((resolve, reject) => {
+        typicalDBRead('StockTransfer', {'_id': logid}, {}, false).then(function(result){
+            console.log(result[0].destinationId);
+            typicalDBRead('StockLocations', {'_id': result[0].destinationId}, {}, false).then(function(locationDetails){
+                result = [result[0], locationDetails[0]]
+                resolve(result);
+            });
+        });
+    });
+}
+module.exports.getFirstPage = (collection, locid) => {
+
+    return new Promise((resolve, reject) => {
+
+        if(collection === "Inventory"){
+
+            typicalDBRead('Inventory',{'locationId': locid}, {}, true).then(function(result){
+                let recordCount = result;
+
+                db.Inventory.find({'locationId': locid}).limit(10).exec(function (err, result) {
+                    resolve({count: recordCount, data: result});
+                });
+
+            });
+
+        } else if(collection === "StockTransfer"){
+
+            typicalDBRead('StockTransfer',{ $or: [ { originId: locid}, { destinationId: locid } ] } , {}, true).then(function(result){
+                let recordCount = result;
+
+                db.StockTransfer.find({ $or: [ { originId: locid}, { destinationId: locid } ] } ).limit(10).exec(function (err, result) {
+                    resolve({count: recordCount, data: result});
+                });
+
+            });
+
+        } else if(collection === "StockReceipt"){
+
+            typicalDBRead('StockReceipt',{originId: locid}, {}, true).then(function(result){
+                let recordCount = result;
+
+                db.StockReceipt.find({originId: locid}).limit(10).exec(function (err, result) {
+                    resolve({count: recordCount, data: result});
+                });
+
+            });
+
+        }
+    });
+
 }

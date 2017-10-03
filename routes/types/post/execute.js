@@ -8,8 +8,6 @@ const validator = require('../validate');
 
 //POST Requests
 
-
-
 router.post("/receive" , function(req, res){
     res.set('Content-Type', 'application/json');
     let collection;
@@ -92,7 +90,7 @@ router.post("/send" , function(req, res){
             let count = 0;
 
             while(count < req.body.batchQuantity.length){
-                totalQuantity += req.body.batchQuantity[count];
+                totalQuantity += parseInt(req.body.batchQuantity[count]);
                 count += 1;
             }
             db.Inventory.findOne({productId: req.body.productId, locationId: req.body.originId}).exec(function (err, result) {
@@ -100,14 +98,16 @@ router.post("/send" , function(req, res){
                 count = 0;
                 result.quantity -= totalQuantity;
                 while(count < req.body.batches.length){
-                     let index = result.batches.indexOf(req.body.batches[count]);
-
-                     result.batchQuantity[index] = result.batchQuantity[index] - req.body.batchQuantity[count];
+                     let index = result.batches.indexOf(parseInt(req.body.batches[count]));
+                     if(index != -1){
+                        result.batchQuantity[index] = parseInt(result.batchQuantity[index]) - parseInt(req.body.batchQuantity[count]);
+                     }
 
                      count +=1;
                 }
+
                 db.Inventory.updateOne({'_id': result._id}, { quantity: result.quantity, batchQuantity: result.batchQuantity }).exec(function (err, updatedInventory) {
-                    
+                 
                     let newRecord = new db.StockTransfer({
                         timestamp: Date(),
                         productName: result.productName, 
@@ -133,5 +133,21 @@ router.post("/send" , function(req, res){
         }
     });
 
+});
+
+router.post("/:dataset/:skip/:limit" , function(req, res){
+
+    var collection = validator.premissions(req.params.dataset, res, "get");
+    let queryString = {};
+    queryString[req.body.field] = new RegExp(".*"+req.body.query+".*", "i");
+    res.set('Content-Type', 'application/json');
+    if(collection != null){
+        console.log(queryString);
+        db[collection].find(queryString).skip(parseInt(req.params.skip))
+        .limit(parseInt(req.params.limit)).exec(function (err, result) {
+            console.log(result);
+            res.send(result);
+        });
+    }
 });
 module.exports = router;

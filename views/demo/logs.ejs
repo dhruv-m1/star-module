@@ -22,7 +22,23 @@
                             <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Logs</h3>
                         </header>
                     </div>
-
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7 col-sm-12 search">
+                            <div class="input-group">
+                                <button type="button" correspondence="productName" class="btn btn-secondary dropdown-toggle search-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Name
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item search-option" correspondence="productName">Name</a>
+                                    <a class="dropdown-item search-option" correspondence="productId">ID</a>
+                                </div>
+                                <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-11 col-md-11">
                             <ul class="nav nav-tabs" role="tablist">
@@ -44,12 +60,23 @@
                                         <tr>
                                             <th class="hidden-xs-down">ID</th>
                                             <th>Product</th>
-                                            <th>Factory</th>
                                             <th>QTY.</th>
-                                            <th>Timestamp</th>
+                                            <th>Time</th>
+                                            <th>Details</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody count="<%= receipts.count %>" showing="<%= receipts.data.length %>">
+                                        <% receipts.data.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= receipts.data[index]._id %></td>
+                                            <td><%= receipts.data[index].productName %></td>
+                                            <td><%= results[index].quantity %></td>
+                                            <td><%= results[index].timestamp %></td>
+                                        <td>
+                                            <a href="/demo/transfers/print/packingslip/<%= receipts.data[index]._id %>"><button type="button" class="btn btn-secondary btn-sm">Slip</button></a>
+                                        </td>
+                                        </tr>
+                                    <% }) %>
                                     </tbody>
                                 </table>
                             </div>

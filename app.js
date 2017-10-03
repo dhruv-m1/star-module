@@ -38,19 +38,30 @@ app.get('/demo/directory', function(req, res){
     res.render('demo/directory', {loc: loc});
 })
 app.get('/demo/logs', function(req, res){
-    res.render('demo/logs', {loc: loc});
+    gateway.getFirstPage('StockTransfer', loc._id).then(function(transfers){
+        gateway.getFirstPage('StockReceipt', loc._id).then(function(receipts){
+            console.log({loc: loc, transfers: transfers, receipts: receipts});
+            res.render('demo/logs', {loc: loc, transfers: transfers, receipts: receipts});
+        });
+    });
 })
 app.get('/demo/transfers', function(req, res){
     res.render('demo/transfers', {loc: loc});
 })
 app.get('/demo/transfers/register', function(req, res){
-    gateway.getTransferData(req.query.origin, '').then(function(result){
-        console.log(result);
+    gateway.getTransferData(req.query.origin, req.query.productid).then(function(result){
         res.render('demo/transfers-register', {data: result, loc: loc});
     });
 })
+app.get('/demo/transfers/print/packingslip/:logid', function(req, res){
+    gateway.getTransferConfirmation(req.params.logid).then(function(result){
+        res.render('demo/transfers-package-slip', {image: `{"id":"${req.params.logid}", "log": "T"}`, data: result[0], location: result[1]});
+    });
+})
 app.get('/demo/inventory', function(req, res){
-    res.render('demo/inventory', {loc: loc});
+    gateway.getFirstPage('Inventory', loc._id).then(function(result){
+        res.render('demo/inventory', {loc: loc, resultCount: result.count, results: result.data});
+    });
 })
 app.get('/demo/scan', function(req, res){
     res.render('demo/scan', {loc: loc});

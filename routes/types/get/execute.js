@@ -8,17 +8,6 @@ const db = require('../../../app-data/db-settings');
 
 //GET Requests Only
 
-router.get("/:dataset/count" , function(req, res){
-    
-    var collection = validator.premissions(req.params.dataset, res, "get");
-    res.set('Content-Type', 'application/json');
-    if(collection != null){
-        db[collection].find().count(function (err, result) {
-            res.send(`{"count": ${result}}`);
-        });
-    }
-});
-
 router.get("/:dataset/:skip/:limit" , function(req, res){
 
     var collection = validator.premissions(req.params.dataset, res, "get");
@@ -26,6 +15,7 @@ router.get("/:dataset/:skip/:limit" , function(req, res){
     if(collection != null){
         db[collection].find().skip(parseInt(req.params.skip))
         .limit(parseInt(req.params.limit)).exec(function (err, result) {
+            console.log(result);
             res.send(result);
         });
     }
