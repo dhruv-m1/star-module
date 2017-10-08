@@ -25,11 +25,6 @@ module.exports.ProductList = mongoose.model('ProductList', new Schema({
     cost: Number
 },{ collection: 'ProductList' }));
 
-module.exports.CategoryList = mongoose.model('CategoryList', new Schema({
-    name: String,
-    description: String
-},{ collection: 'CategoryList' }));
-
 module.exports.StockReceipt = mongoose.model('StockReceipt', new Schema({
     _id: {
         type: shortid,
@@ -88,7 +83,7 @@ module.exports.Inventory = mongoose.model('Inventory', new Schema({
     batchQuantity: Array
 },{ collection: 'Inventory' }));
 
-module.exports.Plants = mongoose.model('Plants', new Schema({
+module.exports.plants = mongoose.model('plants', new Schema({
     name: String,
     owner: String,
     address: String,
@@ -97,14 +92,6 @@ module.exports.Plants = mongoose.model('Plants', new Schema({
     phone: Number
 },{ collection: 'plants' }));
 
-module.exports.Customers = mongoose.model('Customers', new Schema({
-    name: String,
-    email: String,
-    landline: Number,
-    mobile: Number,
-    created: Date,
-    updated: Date
-},{ collection: 'customers' }));
 module.exports._sessions = mongoose.model('_sessions', new Schema({
-    currentLocation: String,
+    currentLocation: String
 },{ collection: '_sessions' }));

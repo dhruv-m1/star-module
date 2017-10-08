@@ -25,7 +25,7 @@ scanner.addListener('scan', function (content) {
                 }
             }
     });
-    //send the request
+    
 });
 Instascan.Camera.getCameras().then(function (cameras) {
 if (cameras.length > 0) {

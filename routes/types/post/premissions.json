@@ -1,30 +1,23 @@
 {
-    "products": {
-        "allow": true,
-        "collection": "ProductList"
+    "ProductList": {
+        "allow": true
     },
-    "categories": {
-        "allow": true,
-        "collection": "CategoryList"
+    "_sessions": {
+        "allow": false
     },
-    "stock-locations": {
-        "allow": true,
-        "collection": "StockLocations"
+    "stockLocations": {
+        "allow": true
     },
-    "plants": {
-        "allow": true,
-        "collection": "Plants"
+    "Plants": {
+        "allow": true
     },
-    "inventory": {
-        "allow": true,
-        "collection": "Inventory"
+    "Inventory": {
+        "allow": true
     },
-    "stock-receipt": {
-        "allow": true,
-        "collection": "StockReceipt"
+    "stockReceipt": {
+        "allow": true
     },
-    "stock-transfer": {
-        "allow": true,
-        "collection": "StockTransfer"
+    "stockTransfer": {
+        "allow": true
     }
 }

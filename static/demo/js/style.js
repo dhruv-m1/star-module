@@ -34,3 +34,7 @@ $('.search-option').click(function(){
     $('.search-select').html($(this).html());
     $('.search-select').attr('correspondence',$(this).attr('correspondence'));
 })
+
+
+let activePage = $('title').html().replace(' - Star Module Demo','');
+$(`#${activePage}`).addClass("active");

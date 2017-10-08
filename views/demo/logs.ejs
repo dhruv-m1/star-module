@@ -23,14 +23,15 @@
                         </header>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 col-md-7 col-sm-12 search">
+                        <div class="col-lg-5 col-md-7 col-sm-12 search" dataset="StockReceipt">
                             <div class="input-group">
                                 <button type="button" correspondence="productName" class="btn btn-secondary dropdown-toggle search-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Name
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item search-option" correspondence="productName">Name</a>
-                                    <a class="dropdown-item search-option" correspondence="productId">ID</a>
+                                    <a class="dropdown-item search-option" correspondence="_id">ID</a>
+                                    <a class="dropdown-item search-option" correspondence="originId">Origin ID</a>
                                 </div>
                                 <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
                                 <div class="input-group-btn">
@@ -43,10 +44,10 @@
                         <div class="col-lg-11 col-md-11">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#receipts-table" role="tab">Reciept (Factory)</a>
+                                    <a class="nav-link active table-toggle" data-toggle="tab" href="#receipts-table" role="tab" dataset="StockReceipt">Reciept (Factory)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#transfers-table" role="tab">Transfer (In/Out Other)</a>
+                                    <a class="nav-link table-toggle" data-toggle="tab" href="#transfers-table" role="tab" dataset="StockTransfer">Transfer (In/Out Other)</a>
                                 </li>
                         </div>
                     </div>
@@ -61,24 +62,23 @@
                                             <th class="hidden-xs-down">ID</th>
                                             <th>Product</th>
                                             <th>QTY.</th>
-                                            <th>Time</th>
-                                            <th>Details</th>
+                                            <th>Origin ID</th>
                                         </tr>
                                     </thead>
-                                    <tbody count="<%= receipts.count %>" showing="<%= receipts.data.length %>">
-                                        <% receipts.data.forEach(function(item, index){ %>
+                                    <tbody count="<%= receipts.count %>" showing="<%= receipts.data.length %>" id="tbody-StockReceipt">
+                                    <% receipts.data.forEach(function(item, index){ %>
                                         <tr scope="row">
                                             <td class="hidden-xs-down"><%= receipts.data[index]._id %></td>
                                             <td><%= receipts.data[index].productName %></td>
-                                            <td><%= results[index].quantity %></td>
-                                            <td><%= results[index].timestamp %></td>
-                                        <td>
-                                            <a href="/demo/transfers/print/packingslip/<%= receipts.data[index]._id %>"><button type="button" class="btn btn-secondary btn-sm">Slip</button></a>
-                                        </td>
+                                            <td><%= receipts.data[index].quantity %></td>
+                                            <td><%= receipts.data[index].originId %></td>
                                         </tr>
                                     <% }) %>
                                     </tbody>
                                 </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="StockReceipt" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
                             </div>
                             <div class="tab-pane" id="transfers-table" role="tabpanel">
                                 <table class="table table-hover" style="width: 100%;">
@@ -86,14 +86,28 @@
                                         <tr>
                                             <th class="hidden-xs-down">ID</th>
                                             <th>Product</th>
-                                            <th>Origin</th>
                                             <th>QTY.</th>
-                                            <th>Timestamp</th>
+                                            <th>Origin ID</th>
+                                            <th>Details</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody count="<%= transfers.count %>" showing="<%= transfers.data.length %>" id="tbody-StockTransfer">
+                                    <% transfers.data.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= transfers.data[index]._id %></td>
+                                            <td><%= transfers.data[index].productName %></td>
+                                            <td><%= transfers.data[index].quantity %></td>
+                                            <td><%= transfers.data[index].originId %></td>
+                                        <td>
+                                            <a href="/demo/transfers/print/packingslip/<%= transfers.data[index]._id %>"><button type="button" class="btn btn-secondary btn-sm">Slip</button></a>
+                                        </td>
+                                        </tr>
+                                    <% }) %>
                                     </tbody>
                                 </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="StockTransfer" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
                             </div>
                         </div>
                     </div>

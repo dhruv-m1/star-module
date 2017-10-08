@@ -14,14 +14,6 @@ if(window.location.pathname.replace(/\//g, '') === 'demodirectory'){
 
 }
 
-if(window.location.pathname.replace(/\//g, '') === 'demologs'){
-
-    $.when($(document).ready).then(
-        $.when(logs.getCount('stock-receipt')).then(logs.getAndAppendStockReceipts()),
-        $.when(logs.getCount('stock-transfer')).then(logs.getAndAppendTransfers())
-    );
-
-}
 if(window.location.pathname.replace(/\//g, '') === 'demotransfers'){
     $('#transfer-origin').attr('value', $('#locationid span').html());
 }
@@ -40,13 +32,16 @@ if(window.location.pathname.replace(/\//g, '') === 'demoscan'){
 }
 
 $('.ShowMore').click(function(){
-    let searchState = $('.ShowMore').attr('search');
+    let searchState = $(this).attr('search');
     if(searchState === 'false'){
-        universal.getMore();
+        universal.getMore(this);
     }else{
         universal.search(10);
     }
 })
 $('.search-button').click(function(){
     universal.search(0);
+})
+$('.table-toggle').click(function(){
+    $('.search').attr('dataset', $(this).attr('dataset'));
 })

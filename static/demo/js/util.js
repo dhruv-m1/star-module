@@ -46,48 +46,29 @@ const directory = {
 }
 
 const logs = {
-    recieptsCount :0,
-    recieptsDisplayed: 0,
-    transfersCount :0,
-    transfersDisplayed: 0,
-    getCount: function(dataset){
-        $.get( `/api/${dataset}/count`, function(res) {
-            if(dataset === "stock-receipt"){
-                logs.recieptsCount = res.count;
-            }
-            else if(dataset === "plants"){
-                logs.transfersCount = res.count;
-            }
+    appendToReceiptsTable: function(res){
+
+        res.forEach(function(item, index){
+            $("#tbody-StockReceipt").append(`<tr scope="row">
+                <td class="hidden-xs-down">${res[index]._id}</td>
+                <td>${ res[index].productName }</td>
+                <td>${ res[index].quantity }</td>
+                <td>${ res[index].originId }</td>
+            </tr>`);
         });
     },
-    getAndAppendStockReceipts: function(){
-        $.get( `/api/stock-receipt/${logs.recieptsDisplayed}/${logs.recieptsDisplayed+5}`, function(res) {
-            $(res).each(function(index, item){
-                let html = `<tr>
-                    <td scope="row" class="hidden-xs-down">${item._id}</td>
-                    <td>${item.productName}</td>
-                    <td><span class="">${item.originName}</span></td>
-                    <td>${item.quantity}</td>\
-                    <td scope="row">${item.timestamp}</td>
-                </tr>`;
-                $('#receipts-table tbody').append(html);
-                logs.recieptsDisplayed += 5;
-            });
-        });
-    },
-    getAndAppendTransfers: function(){
-        $.get( `/api/stock-transfer/${logs.transfersDisplayed}/${logs.transfersDisplayed+5}`, function(res) {
-            $(res).each(function(index, item){
-                let html = `<tr>
-                    <td scope="row" class="hidden-xs-down">${item._id}</td>
-                    <td>${item.productName}</td>
-                    <td><span class="">${item.originName}</span></td>
-                    <td>${item.quantity}</td>\
-                    <td scope="row">${item.timestamp}</td>
-                </tr>`;
-                $('#transfers-table tbody').append(html);
-                logs.transfersDisplayed += 5;
-            });
+    appendToTransfersTable: function(res){
+
+        res.forEach(function(item, index){
+            $("#tbody-StockTransfer").append(`<tr scope="row">
+                <td class="hidden-xs-down">${res[index]._id}</td>
+                <td>${ res[index].productName }</td>
+                <td>${ res[index].quantity }</td>
+                <td>${ res[index].originId }</td>
+            <td>
+                <a href="/demo/transfers/print/packingslip/${ res[index]._id }"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
+            </td>
+            </tr>`);
         });
     }
 }
@@ -168,13 +149,14 @@ const transfers = {
 }
 
 const universal = {
-    getMore: function(){
-        $('.ShowMore').attr('disabled', 'true');
-        $('.ShowMore').html("Working on it...");
+    getMore: function(ShowMoreBtn){
+        $(ShowMoreBtn).attr('disabled', 'true');
+        $(ShowMoreBtn).html("Working on it...");
 
-        let collection = $('.ShowMore').attr('dataset');
-        let total = parseInt($('tbody').attr('count'));
-        let showing = parseInt($('tbody').attr('showing'));
+        let collection = $(ShowMoreBtn).attr('dataset');
+        let tableid = `#tbody-${collection}`;
+        let total = parseInt($(tableid).attr('count'));
+        let showing = parseInt($(tableid).attr('showing'));
 
          $.ajax({
             url:`/api/${collection}/${showing}/10`,
@@ -187,32 +169,35 @@ const universal = {
                 }
 
                 showing += res.length;
-                $('tbody').attr('showing', showing);
+                $(tableid).attr('showing', showing);
                 if(total === showing){
-                    $('.ShowMore').attr('disabled', 'true');
-                    $('.ShowMore').html("That's All :)");
+                    $(ShowMoreBtn).attr('disabled', 'true');
+                    $(ShowMoreBtn).html("That's All :)");
                 }else{
-                    $('.ShowMore').removeAttr("disabled");
-                    $('.ShowMore').html("Show More");
+                    $(ShowMoreBtn).removeAttr("disabled");
+                    $(ShowMoreBtn).html("Show More");
                 }
             }
         });
     },
     search: function(additionFactor){
+
+        let collection = $('.search').attr('dataset');
+        let ShowMoreBtn = '.ShowMore[dataset='+collection+']';
+        let tableid = `#tbody-${collection}`;
         
-        $('.ShowMore').attr('disabled', 'true');
-        $('.ShowMore').attr('search', 'true');
-        $('.ShowMore').html("Working on it...");
+        $(ShowMoreBtn).attr('disabled', 'true');
+        $(ShowMoreBtn).attr('search', 'true');
+        $(ShowMoreBtn).html("Working on it...");
 
         let selection = $('.search-select').attr('correspondence');
         let keyword = {field: selection, query: $('#search-keyword').val()}
-        let collection = $('.ShowMore').attr('dataset');
         
         let showing = 0;
         showing += additionFactor;
 
         if(additionFactor === 0){
-            $('tbody').html('');
+            $(tableid).html('');
         }
 
         if(keyword.query === ''){
@@ -227,13 +212,17 @@ const universal = {
             dataType:"json",
             success: function(res){
                 if(res.length === 0){
-                    $('.ShowMore').html("Nothing to display :)");
+                    $(ShowMoreBtn).html("Nothing to display :)");
                 }else{
-                    $('.ShowMore').removeAttr("disabled");
-                    $('.ShowMore').html("Show More");
+                    $(ShowMoreBtn).removeAttr("disabled");
+                    $(ShowMoreBtn).html("Show More");
                 }
                 if(collection === 'Inventory'){
                     inventory.appendToTable(res);
+                }else if(collection === 'StockReceipt'){
+                    logs.appendToReceiptsTable(res);
+                }else if(collection === 'StockTransfer'){
+                    logs.appendToTransfersTable(res);
                 }
             }
         });

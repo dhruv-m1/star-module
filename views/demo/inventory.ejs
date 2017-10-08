@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Logs - Star Module Demo</title>
+        <title>Inventory - Star Module Demo</title>
         <% include partials/universal-dependencies/external-css.ejs %>
     </head>
     
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-5 col-md-7 col-sm-12 search">
+                        <div class="col-lg-5 col-md-7 col-sm-12 search" dataset="Inventory">
                             <div class="input-group">
                                 <button type="button" correspondence="productName" class="btn btn-secondary dropdown-toggle search-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Name
@@ -52,7 +52,7 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody count="<%= resultCount %>" showing="<%= results.length %>">
+                                    <tbody count="<%= resultCount %>" showing="<%= results.length %>" id="tbody-Inventory">
                                         <% results.forEach(function(item, index){ %>
                                         <tr scope="row">
                                             <td class="hidden-xs-down"><%= results[index].productId %></td>
@@ -66,7 +66,7 @@
                                     </tbody>
                                 </table>
                                 <center>
-                                    <button type="button" id="inventory-showmore" dataset="Inventory" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                    <button type="button" id="Inventory-showmore" dataset="Inventory" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
                                 </center>
                             </div>
                         </div>

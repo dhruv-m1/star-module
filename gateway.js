@@ -42,15 +42,14 @@ module.exports.getLocStats = (locid) => {
 
         let done = () => {
             count++;
-            if (count === 9){
+            if (count === 8){
                 resolve(stats);
             }
         }
 
         typicalDBRead('ProductList', {}, {}, true).then(function(result){stats.products = result; done();});
-        typicalDBRead('CategoryList',{}, {}, true).then(function(result){stats.categories = result; done();});
         typicalDBRead('StockLocations',{}, {}, true).then(function(result){stats.directory.depots = result; done();});
-        typicalDBRead('Plants', {}, {}, true).then(function(result){stats.directory.factories = result; done();});
+        typicalDBRead('plants', {}, {}, true).then(function(result){stats.directory.factories = result; done();});
 
         typicalDBRead('StockTransfer',{'destinationId': locid}, {}, true).then(function(result){stats.logs.in = result; done();});
         typicalDBRead('StockReceipt',{'destinationId': locid}, {}, true).then(function(result){stats.logs.receipt = result; done();});
@@ -94,7 +93,7 @@ module.exports.getTransferData = (location, article) => {
 module.exports.getTransferConfirmation = (logid) => {
     return new Promise((resolve, reject) => {
         typicalDBRead('StockTransfer', {'_id': logid}, {}, false).then(function(result){
-            console.log(result[0].destinationId);
+
             typicalDBRead('StockLocations', {'_id': result[0].destinationId}, {}, false).then(function(locationDetails){
                 result = [result[0], locationDetails[0]]
                 resolve(result);
@@ -130,10 +129,21 @@ module.exports.getFirstPage = (collection, locid) => {
 
         } else if(collection === "StockReceipt"){
 
-            typicalDBRead('StockReceipt',{originId: locid}, {}, true).then(function(result){
+            typicalDBRead('StockReceipt',{destinationId: locid}, {}, true).then(function(result){
                 let recordCount = result;
 
-                db.StockReceipt.find({originId: locid}).limit(10).exec(function (err, result) {
+                db.StockReceipt.find({destinationId: locid}).limit(10).exec(function (err, result) {
+                    resolve({count: recordCount, data: result});
+                });
+
+            });
+
+        } else if(collection === "plants" || collection === "StockLocations"){
+
+            typicalDBRead(collection,{}, {}, true).then(function(result){
+                let recordCount = result;
+
+                db[collection].find().limit(10).exec(function (err, result) {
                     resolve({count: recordCount, data: result});
                 });
 

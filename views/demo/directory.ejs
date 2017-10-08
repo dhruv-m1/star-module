@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Dashboard - Star Module Demo</title>
+        <title>Directory - Star Module Demo</title>
         <% include partials/universal-dependencies/external-css.ejs %>
     </head>
     
@@ -27,7 +27,7 @@
                         <div class="col-lg-11 col-md-11">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#depots-table" role="tab">Depots/Warehouses</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#depots-table" role="tab">Warehouses</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#factories-table" role="tab">Factories</a>
@@ -45,11 +45,23 @@
                                             <th class="hidden-xs-down">ID</th>
                                             <th>Name</th>
                                             <th>Address</th>
-                                            <th>Contact</th>
+                                            <th>Phone</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody count="<%= warehouses.count %>" showing="<%= warehouses.data.length %>" id="tbody-StockLocations">
+                                    <% warehouses.data.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= warehouses.data[index]._id %></td>
+                                            <td><%= warehouses.data[index].name %></td>
+                                            <td><%= warehouses.data[index].address %></td>
+                                            <td><%= warehouses.data[index].contact %> (<%= warehouses.data[index].phone %>)</td>
+                                        </tr>
+                                    <% }) %>
                                     </tbody>
+                                </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="StockLocations" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
                                 </table>
                             </div>
                             <div class="tab-pane" id="factories-table" role="tabpanel">
@@ -59,12 +71,23 @@
                                             <th class="hidden-xs-down">ID</th>
                                             <th>Name</th>
                                             <th>Address</th>
-                                            <th>Contact</th>
+                                            <th>Phone</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody count="<%= plants.count %>" showing="<%= plants.data.length %>" id="tbody-plants">
+                                    <% plants.data.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= plants.data[index]._id %></td>
+                                            <td><%= plants.data[index].name %></td>
+                                            <td><%= plants.data[index].address %></td>
+                                            <td><%= plants.data[index].contact %> (<%= plants.data[index].phone %>)</td>
+                                        </tr>
+                                    <% }) %>
                                     </tbody>
                                 </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="plants" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
                             </div>
                         </div>
                     </div>

@@ -35,12 +35,16 @@ app.get('/demo/', function(req, res){
 })
 
 app.get('/demo/directory', function(req, res){
-    res.render('demo/directory', {loc: loc});
+    gateway.getFirstPage('plants', loc._id).then(function(plants){
+        gateway.getFirstPage('StockLocations', loc._id).then(function(warehouses){
+            res.render('demo/directory', {loc: loc, plants: plants, warehouses: warehouses});
+            
+        });
+    });
 })
 app.get('/demo/logs', function(req, res){
     gateway.getFirstPage('StockTransfer', loc._id).then(function(transfers){
         gateway.getFirstPage('StockReceipt', loc._id).then(function(receipts){
-            console.log({loc: loc, transfers: transfers, receipts: receipts});
             res.render('demo/logs', {loc: loc, transfers: transfers, receipts: receipts});
         });
     });
