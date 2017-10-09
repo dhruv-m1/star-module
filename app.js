@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/demo/', function(req, res){
-    gateway.getLocStats(req.cookies.sessionLocation).then(function(result){
+    gateway.getLocStats(loc._id).then(function(result){
         res.render('demo/index', {result: result, loc: loc});
     });
 })
@@ -54,7 +54,11 @@ app.get('/demo/transfers', function(req, res){
 })
 app.get('/demo/transfers/register', function(req, res){
     gateway.getTransferData(req.query.origin, req.query.productid).then(function(result){
-        res.render('demo/transfers-register', {data: result, loc: loc});
+        if(result === undefined){
+            res.send("<script>alert('No Inventory Found.'); window.location = '/demo/transfers';</script>");
+        }else{
+            res.render('demo/transfers-register', {data: result, loc: loc});
+        }
     });
 })
 app.get('/demo/transfers/print/packingslip/:logid', function(req, res){

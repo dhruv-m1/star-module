@@ -4,43 +4,19 @@
     <div class="row no-gutters">
 
         <!-- Column -->
-        <div class="col-lg-5 col-md-5 no-padding-x" id="infocards-products">
+        <div class="col-lg-8 col-md-8 no-padding-x" id="infocards-products">
 
             <section class="card">
-                <h5 class="card-header">Products</h5>
+                <h5 class="card-header">Inventory</h5>
 
                 <section class="card-block">
-                    <h1 class="card-title"><%= result.products %></h1>
-                    <p class="card-text">So many products! Explore the catelog and be sure that you're always stocked up.</p>
-                    <a href="#" class="btn btn-outline-primary hidden-md-down card-buttons">Explore Products & Inventory</a>
-                    <a href="#" class="btn btn-outline-primary hidden-lg-up btn-sm card-buttons">Explore Products & Inventory</a>
-                </section>
-            </section>
-
-        </div>
-
-        <!-- Column -->
-        <div class="col-lg-3 col-md-3 no-padding-x">
-
-            <section class="card" id="infocards-inventory">
-                <p class="card-header">Inventory</p>
-
-                <section class="card-block">
-                    <h4 class="card-text">
-                        <span><%= result.inventory %></span> 
-                        <small>(In-Stock)</small>
-                    </h4>
-                </section>
-            </section>
-
-            <section class="card" id="infocards-categories">
-                <p class="card-header">Categories</p>
-                
-                <section class="card-block">
-                    <h4 class="card-text">
-                        <span></span>
-                        <small>(Total)</small>
-                    </h4>
+                    <h1 class="card-title"><%= result.inventory %> <small>Items</small></h1>
+                    <p class="card-text">
+                        Welcome to the Stock Transfer & Receipt Module! Use this space to accuartely & securely manage the 
+                        inflow and outflow of stock in your warehouse and be sure that you always have what's needed.
+                    </p>
+                    <a href="/demo/inventory" class="btn btn-outline-primary hidden-md-down card-buttons">Explore Inventory</a>
+                    <a href="/demo/inventory" class="btn btn-outline-primary hidden-lg-up btn-sm card-buttons">Explore Inventory</a>
                 </section>
             </section>
 
@@ -58,7 +34,7 @@
                         <li class="list-group-item">
                             <h4>
                                 <span id="dash-grid-depots"><%= result.directory.depots %></span> 
-                                <small>Depots</small>
+                                <small>Warehouses</small>
                             </h4>
                         </li>
                         <li class="list-group-item">
@@ -69,7 +45,7 @@
                         </li>
                     </ul>
 
-                    <a href="#" class="btn btn-outline-primary btn-sm card-buttons">Open</a>
+                    <a href="/demo/directory" class="btn btn-outline-primary btn-sm card-buttons">See More</a>
 
                 </section>
             </section>
@@ -84,7 +60,7 @@
         <div class="col-lg-5 col-md-5 no-padding-x" id="infocards-logs">
 
             <section class="card">
-                <p class="card-header">Logs (This Month)</p>
+                <p class="card-header">Logs (All Time)</p>
                 <section class="card-block">
 
                     <ul class="list-group list-group-flush">
@@ -108,7 +84,7 @@
                         </li>
                     </ul>
 
-                    <a href="#" class="btn btn-outline-primary btn-sm card-buttons">View Details</a>
+                    <a href="#" class="btn btn-outline-primary btn-sm card-buttons">Lookup Details</a>
 
                 </section>
             </section>

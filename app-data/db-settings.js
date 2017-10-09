@@ -4,13 +4,19 @@ const Schema = mongoose.Schema;
 
 var shortid = require('mongoose-shortid-nodeps');
 mongoose.Promise = global.Promise;
+const bcrypt = require('bcrypt');
 
 console.log('>> Establishing Database connection.');
 mongoose.connect("mongodb://localhost:27017/star_module");
 //Warning may be seen on console due to Mongoose issue #5304 on GitHub. This can safely be ignored.
-mongoose.connection.once('open', function(){
+let connection = mongoose.connection;
+
+module.exports.connection = connection;
+
+connection.once('open', function(){
     console.log('>> Connected.');
-}).on('error', function(error){
+})
+connection.on('error', function(error){
     console.log(`>> ERROR ---> Database Connection: ${error.message}`);
     console.log('---------------');
     console.log(error);

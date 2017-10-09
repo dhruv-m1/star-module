@@ -4,7 +4,11 @@ const router = express.Router();
 
 const mongoose = require('mongoose');
 const db = require('../../../app-data/db-settings');
+const gateway = require('../../../gateway');
 const validator = require('../validate');
+const fs = require('fs');
+const bcrypt = require('bcrypt');
+var shortid = require('mongoose-shortid-nodeps');
 
 //POST Requests
 
@@ -147,6 +151,30 @@ router.post("/:dataset/:skip/:limit" , function(req, res){
         .limit(parseInt(req.params.limit)).exec(function (err, result) {
             console.log(result);
             res.send(result);
+        });
+    }
+});
+
+router.post("/createSession" , function(req, res){
+    let authServers = JSON.parse(fs.readFileSync(__dirname + `/authServers.json`));
+    let isAllowed = authServers.allowed.indexOf(`${req.ip}`);
+    if (isAllowed === '-1'){
+        let err = new Error('Auth Server is Not Authorized.');
+        err.status = 401;
+        res.send(err);
+    }else{
+
+        let newRecord = new db._sessions({
+            currentLocation: req.body.locationId
+        });
+        let unlockKey = newRecord._id;
+
+        bcrypt.hash(unlockKey, 10, function(err, hash) {
+            newRecord._id = hash;
+
+            newRecord.save(function (err) {
+                res.send(`{"status":"Success", "code":"${unlockKey}"}`);
+            });
         });
     }
 });
