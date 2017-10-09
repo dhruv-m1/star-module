@@ -173,7 +173,7 @@ router.post("/createSession" , function(req, res){
             newRecord._id = hash;
 
             newRecord.save(function (err) {
-                res.send(`{"status":"Success", "code":"${unlockKey}"}`);
+                res.send(`{"status":"Success", "code":"${newRecord._id}"}`);
             });
         });
     }
