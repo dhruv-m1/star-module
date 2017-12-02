@@ -18,8 +18,8 @@ app.use(cookieParser());
 let loc;
 app.use(function (req, res, next) {
     try {
-        assert(req.cookies.sessionId != undefined);
-        gateway.setConnection(res, req.cookies.sessionId).then(function(result){
+        //assert(req.cookies.authkey != undefined && req.cookies.sessionId != undefined);
+        gateway.setConnection(res, req).then(function(result){
             loc = result;
             next();
         });

@@ -47,7 +47,7 @@
                                     <a class="nav-link active table-toggle" data-toggle="tab" href="#receipts-table" role="tab" dataset="StockReceipt">Reciept (Factory)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link table-toggle" data-toggle="tab" href="#transfers-table" role="tab" dataset="StockTransfer">Transfer (In/Out Other)</a>
+                                    <a class="nav-link table-toggle" data-toggle="tab" href="#transfers-table" role="tab" dataset="StockTransfer">Transfer (In/Out)</a>
                                 </li>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                     </thead>
                                     <tbody count="<%= transfers.count %>" showing="<%= transfers.data.length %>" id="tbody-StockTransfer">
                                     <% transfers.data.forEach(function(item, index){ %>
-                                        <tr scope="row">
+                                        <tr scope="row" data-toggle="tooltip" data-placement="top" title="<%= transfers.data[index].status %>">
                                             <td><%= transfers.data[index]._id %></td>
                                             <td><%= transfers.data[index].productName %></td>
                                             <td><%= transfers.data[index].quantity %></td>

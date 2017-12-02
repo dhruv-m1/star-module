@@ -178,7 +178,7 @@ center .card-header {
 
 /*Scanner*/
 #scan-table{
-    height: 30%;
+    height: 30vh;
 }
 #scan-all {
 	width: 96%;

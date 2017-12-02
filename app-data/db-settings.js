@@ -99,5 +99,8 @@ module.exports.plants = mongoose.model('plants', new Schema({
 },{ collection: 'plants' }));
 
 module.exports._sessions = mongoose.model('_sessions', new Schema({
-    currentLocation: String
+    currentLocation: String,
+    authkey: String,
+    userip: String,
+    useragent: String
 },{ collection: '_sessions' }));

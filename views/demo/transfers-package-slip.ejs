@@ -14,6 +14,24 @@
             <h5><b>To: <%= location.name %>,<br> <%= location.address %>,<br> Phone: <%= location.phone %></b></h5>
             <footer>
                 <p style="padding: 7px;"><i>Origin: <%= data.originId %> Destination: <%= data.destinationId %></i></p>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Batch #</th>
+                            <th>QTY.</th>
+                            <th>✔</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% data.batches.forEach(function(item, index){ %>
+                        <tr>
+                            <td><%= data.batches[index] %></td>
+                            <td><%= data.batchQuantity[index] %><td/>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+                <p style="padding: 7px;"><small>Slip Created: <%= data.timestamp %></small></p>
             </footer>
         </center>
         <script>

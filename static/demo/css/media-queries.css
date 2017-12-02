@@ -118,7 +118,7 @@
         padding-bottom: 15px;
     }
 }
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 769px) and (max-width: 992px) {
     .search{
         right:-39%;
     }
@@ -127,5 +127,18 @@
 @media (max-width: 575px) {
     #Transfers-Confirm{
         width: 100%;
+    }
+}
+/*Scanner*/
+@media (max-width: 768px) {
+    #scan-table{
+        height: 35vh;
+    }
+    #scan-all{
+        width: 100%;
+        height: 100%;
+    }
+    #QR-Scanner{
+        padding-right: 0;
     }
 }

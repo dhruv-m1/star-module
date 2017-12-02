@@ -8,8 +8,7 @@ const gateway = require('../../../gateway');
 const validator = require('../validate');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
-var shortid = require('mongoose-shortid-nodeps');
-
+const uuidv1 = require('uuid/v1');
 //POST Requests
 
 router.post("/receive" , function(req, res){
@@ -31,7 +30,7 @@ router.post("/receive" , function(req, res){
         }else if(result.status === 'Delivered.'){
             res.send(`{"status":"Already Scanned"}`);
         }else if(req.body.scanLocationId === result.destinationId){
-            db[collection].updateOne({'_id': req.body.id}, { status: 'Delivered.' }).exec(function(err,updateData){
+            db[collection].updateOne({'_id': req.body.id}, { status: `🡮 Delivered on ${Date()}` }).exec(function(err,updateData){
         
                 db.Inventory.findOne({productId: result.productId, locationId: req.body.scanLocationId}).exec(function (err, currentInventory) {
                     if(currentInventory != null){
@@ -105,12 +104,16 @@ router.post("/send" , function(req, res){
                      let index = result.batches.indexOf(parseInt(req.body.batches[count]));
                      if(index != -1){
                         result.batchQuantity[index] = parseInt(result.batchQuantity[index]) - parseInt(req.body.batchQuantity[count]);
+                        if (result.batchQuantity[index] === 0){
+                            result.batchQuantity.splice(index,1);
+                            result.batches.splice(index,1);
+                        }
                      }
 
                      count +=1;
                 }
 
-                db.Inventory.updateOne({'_id': result._id}, { quantity: result.quantity, batchQuantity: result.batchQuantity }).exec(function (err, updatedInventory) {
+                db.Inventory.updateOne({'_id': result._id}, { quantity: result.quantity, batches: result.batches, batchQuantity: result.batchQuantity }).exec(function (err, updatedInventory) {
                  
                     let newRecord = new db.StockTransfer({
                         timestamp: Date(),
@@ -121,7 +124,7 @@ router.post("/send" , function(req, res){
                         quantity: totalQuantity,
                         batches: req.body.batches,
                         batchQuantity: req.body.batchQuantity,
-                        status: "Dispatched"
+                        status: `🡭 Dispatched on ${Date()}`
                     });
 
                     newRecord.save(function (err) {
@@ -158,22 +161,26 @@ router.post("/:dataset/:skip/:limit" , function(req, res){
 router.post("/createSession" , function(req, res){
     let authServers = JSON.parse(fs.readFileSync(__dirname + `/authServers.json`));
     let isAllowed = authServers.allowed.indexOf(`${req.ip}`);
-    if (isAllowed === '-1'){
-        let err = new Error('Auth Server is Not Authorized.');
-        err.status = 401;
-        res.send(err);
+    if (isAllowed === -1){
+        res.sendStatus(403);
     }else{
 
+        let sessionAuthKey = uuidv1();
         let newRecord = new db._sessions({
-            currentLocation: req.body.locationId
+            currentLocation: req.body.locationId,
+            authkey: sessionAuthKey,
+            userip: "captureOnFirstAccess",
+            useragent: "captureOnFirstAccess"
         });
-        let unlockKey = newRecord._id;
 
-        bcrypt.hash(unlockKey, 10, function(err, hash) {
-            newRecord._id = hash;
+        bcrypt.hash(sessionAuthKey, 10, function(err, hash) {
+            newRecord.authkey = hash;
 
             newRecord.save(function (err) {
-                res.send(`{"status":"Success", "code":"${newRecord._id}"}`);
+                console.log(err);
+                console.log(req.headers['user-agent']);
+                console.log(req.ip);
+                res.send(`{"status":"Success", "sessionId":"${newRecord._id}", "authkey":"${sessionAuthKey}"}`);
             });
         });
     }

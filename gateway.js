@@ -1,6 +1,8 @@
 // Written by Dhruv M in 2017
 const db = require('./app-data/db-settings');
+const http = require('http');
 
+const bcrypt = require('bcrypt');
 
 let typicalDBRead = (collection, query, filters, statsOnly) => {
 
@@ -72,12 +74,30 @@ let getLocDetails = (id) => {
     });
 }
 
-module.exports.setConnection = (res, sessionid) =>{
+module.exports.setConnection = (res, req) =>{
     return new Promise((resolve, reject) => {
-        typicalDBRead('_sessions',{'_id': sessionid}, {}, false).then(function(result){
-            res.cookie('sessionLocation', `${result[0].currentLocation}`, { maxAge: 900000, httpOnly: true });
-            getLocDetails(result[0].currentLocation).then(function(data){
-                resolve(data[0]);
+        typicalDBRead('_sessions',{'_id': req.cookies.sessionId}, {}, false).then(function(result){
+            result[0] = JSON.parse(JSON.stringify(result[0]));
+            bcrypt.compare(req.cookies.authkey, result[0].authkey, function(err, allow) {
+                if(allow === true){
+                    if (result[0].userip === "captureOnFirstAccess") {
+
+                        db._sessions.updateOne({'_id': req.cookies.sessionId}, { userip: `${req.ip}`, useragent:`${req.headers['user-agent']}` }).exec(function(err, updateData){
+                            getLocDetails(result[0].currentLocation).then(function(data){
+                                resolve(data[0]);
+                            });
+                        });
+                    }
+
+                    else if (result[0].userip === req.ip && result[0].useragent === req.headers['user-agent']){
+                        getLocDetails(result[0].currentLocation).then(function(data){
+                            resolve(data[0]);
+                        });
+                    }
+                    else{
+                        reject();
+                    }
+                }
             });
         });
     });

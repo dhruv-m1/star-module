@@ -60,13 +60,14 @@ const logs = {
     appendToTransfersTable: function(res){
 
         res.forEach(function(item, index){
-            $("#tbody-StockTransfer").append(`<tr scope="row">
+            $("#tbody-StockTransfer").append(`
+            <tr scope="row" data-toggle="tooltip" data-placement="top" title="${res[index].status}">
                 <td>${res[index]._id}</td>
                 <td>${ res[index].productName }</td>
                 <td>${ res[index].quantity }</td>
                 <td>${ res[index].originId }</td>
             <td class="hidden-xs-down">
-                <a href="/demo/transfers/print/packingslip/${ res[index]._id }"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
+                <a href="/demo/transfers/print/packingslip/${ res[index]._id }"><button type="button" class="btn btn-secondary btn-sm">Slip</button></a>
             </td>
             </tr>`);
         });
@@ -99,18 +100,22 @@ const transfers = {
             let request_batches = [];
             let request_batchQuantity = [];
             let available_batches = $('tbody').attr('batches').split(',');
+            let total = 0;
 
 
             while(count < available_batches.length){
-                
                 if($(`#${available_batches[count]}`).val() != 0){
-
+                    total += parseInt($(`#${available_batches[count]}`).val());
+                    console.log($(`#${available_batches[count]}`).val());
                     request_batches.push(available_batches[count]);
                     request_batchQuantity.push($(`#${available_batches[count]}`).val());
                 }
                 count += 1;
             }
-
+            if(total === 0){
+                alert("Consignment cannot be empty.");
+                return false;
+            }
             let request = {
                 productId: `${transfers.getParam('productid')}`,
                 originId: `${transfers.getParam('origin')}`,
@@ -166,6 +171,11 @@ const universal = {
             success: function(res){
                 if(collection === 'Inventory'){
                     inventory.appendToTable(res);
+                }
+                else if(collection === 'StockReceipt'){
+                    logs.appendToReceiptsTable(res);
+                }else if(collection === 'StockTransfer'){
+                    logs.appendToTransfersTable(res);
                 }
 
                 showing += res.length;
