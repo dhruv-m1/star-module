@@ -35,7 +35,7 @@
                                 </div>
                                 <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
                                 <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span><span class="hidden-xs-down"> Search</span></button>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                 <table class="table table-hover" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th class="hidden-xs-down">ID</th>
+                                            <th>ID</th>
                                             <th>Product</th>
                                             <th>QTY.</th>
                                             <th>Origin ID</th>
@@ -68,7 +68,7 @@
                                     <tbody count="<%= receipts.count %>" showing="<%= receipts.data.length %>" id="tbody-StockReceipt">
                                     <% receipts.data.forEach(function(item, index){ %>
                                         <tr scope="row">
-                                            <td class="hidden-xs-down"><%= receipts.data[index]._id %></td>
+                                            <td><%= receipts.data[index]._id %></td>
                                             <td><%= receipts.data[index].productName %></td>
                                             <td><%= receipts.data[index].quantity %></td>
                                             <td><%= receipts.data[index].originId %></td>
@@ -84,21 +84,21 @@
                                 <table class="table table-hover" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th class="hidden-xs-down">ID</th>
+                                            <th>ID</th>
                                             <th>Product</th>
                                             <th>QTY.</th>
                                             <th>Origin ID</th>
-                                            <th>Details</th>
+                                            <th class="hidden-xs-down">Details</th>
                                         </tr>
                                     </thead>
                                     <tbody count="<%= transfers.count %>" showing="<%= transfers.data.length %>" id="tbody-StockTransfer">
                                     <% transfers.data.forEach(function(item, index){ %>
                                         <tr scope="row">
-                                            <td class="hidden-xs-down"><%= transfers.data[index]._id %></td>
+                                            <td><%= transfers.data[index]._id %></td>
                                             <td><%= transfers.data[index].productName %></td>
                                             <td><%= transfers.data[index].quantity %></td>
                                             <td><%= transfers.data[index].originId %></td>
-                                        <td>
+                                        <td class="hidden-xs-down">
                                             <a href="/demo/transfers/print/packingslip/<%= transfers.data[index]._id %>"><button type="button" class="btn btn-secondary btn-sm">Slip</button></a>
                                         </td>
                                         </tr>

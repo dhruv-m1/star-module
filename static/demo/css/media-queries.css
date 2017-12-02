@@ -110,3 +110,22 @@
         border-top: #0747a6 solid 7px;
     }
 }
+/* Search Boxes */
+@media (max-width: 768px) {
+    .search{
+        right: 0px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .search{
+        right:-39%;
+    }
+}
+/*Transfers Form*/
+@media (max-width: 575px) {
+    #Transfers-Confirm{
+        width: 100%;
+    }
+}

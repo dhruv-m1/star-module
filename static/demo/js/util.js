@@ -50,7 +50,7 @@ const logs = {
 
         res.forEach(function(item, index){
             $("#tbody-StockReceipt").append(`<tr scope="row">
-                <td class="hidden-xs-down">${res[index]._id}</td>
+                <td>${res[index]._id}</td>
                 <td>${ res[index].productName }</td>
                 <td>${ res[index].quantity }</td>
                 <td>${ res[index].originId }</td>
@@ -61,11 +61,11 @@ const logs = {
 
         res.forEach(function(item, index){
             $("#tbody-StockTransfer").append(`<tr scope="row">
-                <td class="hidden-xs-down">${res[index]._id}</td>
+                <td>${res[index]._id}</td>
                 <td>${ res[index].productName }</td>
                 <td>${ res[index].quantity }</td>
                 <td>${ res[index].originId }</td>
-            <td>
+            <td class="hidden-xs-down">
                 <a href="/demo/transfers/print/packingslip/${ res[index]._id }"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
             </td>
             </tr>`);
@@ -77,10 +77,10 @@ const inventory = {
     appendToTable: function(res){
         res.forEach(function(item, index){
             $("tbody").append(`<tr scope="row">
-                                    <td class="hidden-xs-down">${res[index].productId}</td>
+                                    <td>${res[index].productId}</td>
                                     <td>${ res[index].productName }</td>
                                     <td>${ res[index].quantity }</td>
-                                <td>
+                                <td class="hidden-xs-down">
                                     <a href="/demo/transfers/register?origin=${  $('#locationid span').html() }&productid=${res[index].productId}"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
                                 </td>
                                 </tr>`);

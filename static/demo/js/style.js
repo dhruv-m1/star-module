@@ -10,6 +10,9 @@ $(window).resize(function() {
         dashGridStyle.setHeights();
     }
 });
+$('.sidebar-toggle').click(function(){
+    sidebarStyle.toggle();
+});
 
 const dashGridStyle = {
     setHeights: function(){
@@ -27,6 +30,9 @@ const dashGridStyle = {
 const sidebarStyle = {
     forceShow: function(){
         $( "#sidebar" ).show("slow");
+    },
+    toggle: function(){
+        $("#sidebar").animate({width:'toggle'},300);
     }
 }
 

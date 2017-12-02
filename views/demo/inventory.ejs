@@ -35,7 +35,7 @@
                                 </div>
                                 <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
                                 <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span> <span class="hidden-xs-down">Search</span></button>
                                 </div>
                             </div>
                         </div>
@@ -46,19 +46,19 @@
                                 <table class="table table-hover" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th class="hidden-xs-down">ID</th>
+                                            <th>ID</th>
                                             <th>Product</th>
                                             <th>QTY.</th>
-                                            <th>Actions</th>
+                                            <th class="hidden-xs-down">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody count="<%= resultCount %>" showing="<%= results.length %>" id="tbody-Inventory">
                                         <% results.forEach(function(item, index){ %>
                                         <tr scope="row">
-                                            <td class="hidden-xs-down"><%= results[index].productId %></td>
+                                            <td><%= results[index].productId %></td>
                                             <td><%= results[index].productName %></td>
                                             <td><%= results[index].quantity %></td>
-                                        <td>
+                                        <td class="hidden-xs-down">
                                             <a href="/demo/transfers/register?origin=<%= loc._id %>&productid=<%= results[index].productId %>"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
                                         </td>
                                         </tr>
