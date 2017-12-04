@@ -44,6 +44,7 @@ module.exports.StockReceipt = mongoose.model('StockReceipt', new Schema({
     originName: String,
     originId: String,
     destinationId: String,
+    status: String,
     quantity: Number
 },{ collection: 'StockReceipt' }));
 

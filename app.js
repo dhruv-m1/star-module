@@ -5,7 +5,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const routes = require('./routes/core');
 const gateway = require('./gateway');
-const assert = require('assert')
+const assert = require('assert');
 app.listen(process.env.port || 3030);
 
 app.use('/api', routes);
@@ -18,10 +18,18 @@ app.use(cookieParser());
 let loc;
 app.use(function (req, res, next) {
     try {
-        //assert(req.cookies.authkey != undefined && req.cookies.sessionId != undefined);
+        assert(req.cookies.authkey != undefined && req.cookies.sessionId != undefined);
         gateway.setConnection(res, req).then(function(result){
-            loc = result;
-            next();
+            try {
+                if (result === "err"){
+                    throw 401;
+                }else{
+                    loc = result;
+                    next();
+                }
+            } catch (error) {
+                res.send(error);
+            }
         });
     } catch (error) {
         res.send(401);
@@ -68,7 +76,7 @@ app.get('/demo/transfers/print/packingslip/:logid', function(req, res){
 })
 app.get('/demo/inventory', function(req, res){
     gateway.getFirstPage('Inventory', loc._id).then(function(result){
-        res.render('demo/inventory', {loc: loc, resultCount: result.count, results: result.data});
+        res.render('demo/inventory', {loc: loc, results: result.data});
     });
 })
 app.get('/demo/scan', function(req, res){

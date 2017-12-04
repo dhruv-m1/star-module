@@ -16,7 +16,7 @@
                     <div class="row content-top">
                         <header id="page-heading">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/demo">Home</a></li>
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                             <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Directory</h3>
@@ -48,7 +48,7 @@
                                             <th>Phone</th>
                                         </tr>
                                     </thead>
-                                    <tbody count="<%= warehouses.count %>" showing="<%= warehouses.data.length %>" id="tbody-StockLocations">
+                                    <tbody showing="<%= warehouses.data.length %>" id="tbody-StockLocations">
                                     <% warehouses.data.forEach(function(item, index){ %>
                                         <tr scope="row">
                                             <td class="hidden-xs-down"><%= warehouses.data[index]._id %></td>
@@ -74,7 +74,7 @@
                                             <th>Phone</th>
                                         </tr>
                                     </thead>
-                                    <tbody count="<%= plants.count %>" showing="<%= plants.data.length %>" id="tbody-plants">
+                                    <tbody showing="<%= plants.data.length %>" id="tbody-plants">
                                     <% plants.data.forEach(function(item, index){ %>
                                         <tr scope="row">
                                             <td class="hidden-xs-down"><%= plants.data[index]._id %></td>

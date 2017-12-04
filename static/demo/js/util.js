@@ -160,7 +160,6 @@ const universal = {
 
         let collection = $(ShowMoreBtn).attr('dataset');
         let tableid = `#tbody-${collection}`;
-        let total = parseInt($(tableid).attr('count'));
         let showing = parseInt($(tableid).attr('showing'));
 
          $.ajax({
@@ -179,10 +178,8 @@ const universal = {
                 }
 
                 showing += res.length;
-                $(tableid).attr('showing', showing);
-                if(total === showing){
-                    $(ShowMoreBtn).attr('disabled', 'true');
-                    $(ShowMoreBtn).html("That's All :)");
+                if(res.length < 10){
+                    $(ShowMoreBtn).html("That's all :)");
                 }else{
                     $(ShowMoreBtn).removeAttr("disabled");
                     $(ShowMoreBtn).html("Show More");
@@ -223,6 +220,8 @@ const universal = {
             success: function(res){
                 if(res.length === 0){
                     $(ShowMoreBtn).html("Nothing to display :)");
+                }else if(res.length < 10){
+                    $(ShowMoreBtn).html("That's all :)");
                 }else{
                     $(ShowMoreBtn).removeAttr("disabled");
                     $(ShowMoreBtn).html("Show More");

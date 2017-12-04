@@ -77,8 +77,14 @@ let getLocDetails = (id) => {
 module.exports.setConnection = (res, req) =>{
     return new Promise((resolve, reject) => {
         typicalDBRead('_sessions',{'_id': req.cookies.sessionId}, {}, false).then(function(result){
+
+            if(result[0] === undefined) {
+                resolve('err');
+                return;
+            }
             result[0] = JSON.parse(JSON.stringify(result[0]));
             bcrypt.compare(req.cookies.authkey, result[0].authkey, function(err, allow) {
+                
                 if(allow === true){
                     if (result[0].userip === "captureOnFirstAccess") {
 
@@ -91,11 +97,13 @@ module.exports.setConnection = (res, req) =>{
 
                     else if (result[0].userip === req.ip && result[0].useragent === req.headers['user-agent']){
                         getLocDetails(result[0].currentLocation).then(function(data){
+                            
                             resolve(data[0]);
                         });
                     }
                     else{
-                        reject();
+                        resolve('err');
+                        return;
                     }
                 }
             });
@@ -127,48 +135,27 @@ module.exports.getFirstPage = (collection, locid) => {
 
         if(collection === "Inventory"){
 
-            typicalDBRead('Inventory',{'locationId': locid}, {}, true).then(function(result){
-                let recordCount = result;
-
-                db.Inventory.find({'locationId': locid}).limit(10).exec(function (err, result) {
-                    resolve({count: recordCount, data: result});
-                });
-
+            db.Inventory.find({'locationId': locid}).limit(10).exec(function (err, result) {
+                resolve({data: result});
             });
 
         } else if(collection === "StockTransfer"){
 
-            typicalDBRead('StockTransfer',{ $or: [ { originId: locid}, { destinationId: locid } ] } , {}, true).then(function(result){
-                let recordCount = result;
-
-                db.StockTransfer.find({ $or: [ { originId: locid}, { destinationId: locid } ] } ).limit(10).exec(function (err, result) {
-                    resolve({count: recordCount, data: result});
-                });
-
+            db.StockTransfer.find({ $or: [ { originId: locid}, { destinationId: locid } ] } ).limit(10).exec(function (err, result) {
+                resolve({data: result});
             });
 
         } else if(collection === "StockReceipt"){
 
-            typicalDBRead('StockReceipt',{destinationId: locid}, {}, true).then(function(result){
-                let recordCount = result;
-
-                db.StockReceipt.find({destinationId: locid}).limit(10).exec(function (err, result) {
-                    resolve({count: recordCount, data: result});
-                });
-
+            db.StockReceipt.find({destinationId: locid}).limit(10).exec(function (err, result) {
+                resolve({data: result});
             });
 
         } else if(collection === "plants" || collection === "StockLocations"){
 
-            typicalDBRead(collection,{}, {}, true).then(function(result){
-                let recordCount = result;
-
-                db[collection].find().limit(10).exec(function (err, result) {
-                    resolve({count: recordCount, data: result});
-                });
-
+            db[collection].find().limit(10).exec(function (err, result) {
+                resolve({data: result});
             });
-
         }
     });
 

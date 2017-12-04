@@ -5,15 +5,6 @@ $(document).ready(function() {
 });
 //Custom Triggers
 
-if(window.location.pathname.replace(/\//g, '') === 'demodirectory'){
-
-    $.when($(document).ready).then(
-        //$.when(directory.getCount('stock-locations')).then(directory.getAndAppendStockLocations()),
-        //$.when(directory.getCount('plants')).then(directory.getAndAppendFactories())
-    );
-
-}
-
 if(window.location.pathname.replace(/\//g, '') === 'demotransfers'){
     $('#transfer-origin').attr('value', $('#locationid span').html());
 }

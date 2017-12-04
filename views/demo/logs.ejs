@@ -16,7 +16,7 @@
                     <div class="row content-top">
                         <header id="page-heading">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/demo">Home</a></li>
                                 <li class="breadcrumb-item active">Inventory Logs</li>
                             </ol>
                             <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Logs</h3>
@@ -65,9 +65,9 @@
                                             <th>Origin ID</th>
                                         </tr>
                                     </thead>
-                                    <tbody count="<%= receipts.count %>" showing="<%= receipts.data.length %>" id="tbody-StockReceipt">
+                                    <tbody showing="<%= receipts.data.length %>" id="tbody-StockReceipt">
                                     <% receipts.data.forEach(function(item, index){ %>
-                                        <tr scope="row">
+                                        <tr scope="row" data-toggle="tooltip" data-placement="top" title="<%= receipts.data[index].status %>">
                                             <td><%= receipts.data[index]._id %></td>
                                             <td><%= receipts.data[index].productName %></td>
                                             <td><%= receipts.data[index].quantity %></td>
@@ -91,7 +91,7 @@
                                             <th class="hidden-xs-down">Details</th>
                                         </tr>
                                     </thead>
-                                    <tbody count="<%= transfers.count %>" showing="<%= transfers.data.length %>" id="tbody-StockTransfer">
+                                    <tbody showing="<%= transfers.data.length %>" id="tbody-StockTransfer">
                                     <% transfers.data.forEach(function(item, index){ %>
                                         <tr scope="row" data-toggle="tooltip" data-placement="top" title="<%= transfers.data[index].status %>">
                                             <td><%= transfers.data[index]._id %></td>

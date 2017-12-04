@@ -1,19 +1,55 @@
-//STAR Module - Written by Dhruv Malik
-const mongoose = require('mongoose');
 const assert = require('assert');
-
 const db = require('../../app-data/db-settings');
 const fs = require('fs');
 
-module.exports.premissions = function (dataset, res, reqType){
-    var premissions = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/premissions.json`));
-    return dataset;
-    /*if (premissions[dataset].allow === true){
-        return premissions[dataset].collection;
-    }
-    else {
-        res.send(401);
-    }*/
+const gateway = require('../../gateway');
+
+module.exports.permissions = function (dataset, res, req, reqType){
+    return new Promise((resolve, reject) => {
+        try{
+            let permissionsManifest;
+            if (reqType != 'verifiy-loc'){
+                permissionsManifest = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/premissions.json`));
+            }else {
+                permissionsManifest = {null:{allow:true}};
+            }
+
+            if (permissionsManifest[dataset].allow === true){
+                gateway.setConnection(res, req).then(function(result){
+
+                    try {
+                        if (result === "err"){
+                                throw 401;
+                        }else{
+                            if (reqType === 'verifiy-loc') {
+                                resolve(dataset);
+                            } else{
+
+                                let query = permissionsManifest[dataset].query_format;
+
+                                query = query.replace(new RegExp("<loc>", 'g'), `"${result._id}"`);
+
+                                if (reqType === 'post'){
+                                    query = query.replace(new RegExp("<field>", 'g'), req.body.field);
+                                    query = query.replace(new RegExp("<query>", 'g'), `${new RegExp(".*"+req.body.query+".*", "i")}`);
+                                }
+
+                                resolve(query);
+
+                            }
+                        }
+                    } catch (error) {
+                        res.sendStatus(error);
+                    }
+                });
+            }
+            else {
+                res.sendStatus(403);
+            }
+        }catch(error){
+            res.send(401);
+        }
+    });
 }
 
 module.exports.schemaValidate = function (collection, record) {

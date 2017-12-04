@@ -1,23 +1,20 @@
 {
-    "ProductList": {
-        "allow": true
-    },
-    "_sessions": {
+    "StockLocations": {
         "allow": false
     },
-    "stockLocations": {
-        "allow": true
-    },
-    "Plants": {
-        "allow": true
+    "plants": {
+        "allow": false
     },
     "Inventory": {
-        "allow": true
+        "allow": true,
+        "query_format": "{<field>: <query>, locationId: <loc>}"
     },
-    "stockReceipt": {
-        "allow": true
+    "StockReceipt": {
+        "allow": true,
+        "query_format": "{destinationId: <loc>, <field>: <query>}"
     },
-    "stockTransfer": {
-        "allow": true
+    "StockTransfer": {
+        "allow": true,
+        "query_format": "{$or: [ { originId: <loc>, <field>: <query> }, { destinationId: <loc>, <field>: <query> }]}"
     }
 }
