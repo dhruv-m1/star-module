@@ -16,10 +16,10 @@ $('.ShowMore').click(function(){
     }else{
         universal.search(10);
     }
-})
+});
 $('.search-button').click(function(){
     universal.search(0);
-})
+});
 $('.table-toggle').click(function(){
     $('.search').attr('dataset', $(this).attr('dataset'));
-})
+});

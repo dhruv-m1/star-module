@@ -9,7 +9,7 @@ module.exports.permissions = function (dataset, res, req, reqType){
         try{
             let permissionsManifest;
             if (reqType != 'verifiy-loc'){
-                permissionsManifest = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/premissions.json`));
+                permissionsManifest = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/permissions.json`));
             }else {
                 permissionsManifest = {null:{allow:true}};
             }
