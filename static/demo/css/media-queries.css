@@ -1,0 +1,144 @@
+/* 
+    This document contains all the media queries used to create responsive UI. ( Written by Dhruv M in June 2017 ).
+*/
+
+/* NAVIGATION */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    #sidebar h1{
+        font-size: 1.5em;
+        padding: 20px 2.5px 20px 15px;
+    }
+    #sidebar-location{
+        background: rgb(219, 222, 229);
+        padding: 10px 1px 5px 15px;
+        margin: 0;
+        top: 0;
+    }
+    .nav a {
+        font-size: 15px;
+    }
+ }
+
+ @media (max-width: 767px) {
+    #sidebar {
+        display: none;
+        width: 100%;
+    }
+    #sidebar-close{
+        display: block;
+    }
+    #sidebar-open{
+        display: inline-block;
+    }
+ }
+
+ @media (max-width: 575px) {
+    #sidebar h1{
+        font-size: 1.5em;
+        padding: 20px 2.5px 20px 15px;
+    }
+    #sidebar-location{
+        background: rgb(219, 222, 229);
+        padding: 10px 1px 5px 15px;
+        margin: 0;
+        top: 0;
+    }
+    .nav a {
+        font-size: 15px;
+    }
+ }
+
+ /*Page Heading*/
+
+ @media (max-width: 767px) {
+    #page-heading{
+        position: relative;
+        top: 0px;
+        left: 10px;
+        color: #172b4d;
+        margin-bottom: 5px;
+        font-size: smaller;
+    }
+
+    #page-heading h3{
+
+        font-size: 1.2rem;
+    }
+
+    .breadcrumb{
+        margin-bottom: 0;
+        background: transparent;
+        padding-left: 20px;
+    }
+ }
+
+  /*Dashboard Cards*/
+
+  @media (min-width: 768px) and (max-width: 991px) {
+
+    #infocards-directory h4{
+        font-size: 120%;
+    }
+    #infocards-directory .card-buttons{
+        margin-top: 7px;
+    }
+    #infocards-logs .card-buttons{
+        margin-top: 10px;
+    }
+    #infocards-about h4{
+        font-size: 1em;
+        font-weight: bold;
+    }
+ }
+
+  @media (max-width: 767px) {
+    .card{
+        border-radius: 0px;
+    }
+    #infocards-categories {
+        margin-top: 0px;
+    }
+    #infocards-directory{
+        margin-left: 0px;
+    }
+    .row{
+        margin-bottom: 0px;
+    }
+    .content-top{
+        border-top: #0747a6 solid 7px;
+    }
+}
+/* Search Boxes */
+@media (max-width: 768px) {
+    .search{
+        right: 0px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+    .search{
+        right:-39%;
+    }
+}
+/*Transfers Form*/
+@media (max-width: 575px) {
+    #Transfers-Confirm{
+        width: 100%;
+    }
+}
+/*Scanner*/
+@media (max-width: 768px) {
+    #scan-table{
+        height: 35vh;
+    }
+    #scan-all{
+        width: 100%;
+        height: 100%;
+    }
+    #QR-Scanner{
+        padding-right: 0;
+    }
+}

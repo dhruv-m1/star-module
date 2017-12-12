@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Inventory - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/demo">Home</a></li>
+                                <li class="breadcrumb-item active">Inventory</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Inventory</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7 col-sm-12 search" dataset="Inventory">
+                            <div class="input-group">
+                                <button type="button" correspondence="productName" class="btn btn-secondary dropdown-toggle search-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Name
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item search-option" correspondence="productName">Name</a>
+                                    <a class="dropdown-item search-option" correspondence="productId">ID</a>
+                                </div>
+                                <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span> <span class="hidden-xs-down">Search</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="tab-content">
+                            <div id="receipts-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Product</th>
+                                            <th>QTY.</th>
+                                            <th class="hidden-xs-down">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody showing="<%= results.length %>" id="tbody-Inventory">
+                                        <% results.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td><%= results[index].productId %></td>
+                                            <td><%= results[index].productName %></td>
+                                            <td><%= results[index].quantity %></td>
+                                        <td class="hidden-xs-down">
+                                            <a href="/demo/transfers/register?origin=<%= loc._id %>&productid=<%= results[index].productId %>"><button type="button" class="btn btn-secondary btn-sm">Transfer</button></a>
+                                        </td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                                <center>
+                                    <button type="button" id="Inventory-showmore" dataset="Inventory" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>

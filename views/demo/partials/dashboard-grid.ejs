@@ -1,0 +1,114 @@
+<!-- Grid of Informative Cards -->
+<article class="row" id="infocards">
+    <!-- New Row -->
+    <div class="row no-gutters">
+
+        <!-- Column -->
+        <div class="col-lg-8 col-md-8 no-padding-x" id="infocards-products">
+
+            <section class="card">
+                <h5 class="card-header">Inventory</h5>
+
+                <section class="card-block">
+                    <h1 class="card-title"><%= result.inventory %> <small>Items</small></h1>
+                    <p class="card-text">
+                        Welcome to the Stock Transfer & Receipt Module! Use this space to accuartely & securely manage the 
+                        inflow and outflow of stock in your warehouse and be sure that you always have what's needed.
+                    </p>
+                    <a href="/demo/inventory" class="btn btn-outline-primary hidden-md-down card-buttons">Explore Inventory</a>
+                    <a href="/demo/inventory" class="btn btn-outline-primary hidden-lg-up btn-sm card-buttons">Explore Inventory</a>
+                </section>
+            </section>
+
+        </div>
+
+        <!-- Column -->
+        <div class="col-lg-3 col-md-3 no-padding-x">
+
+            <section class="card" id="infocards-directory">
+                <p class="card-header">Directory</p>
+
+                <section class="card-block">
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h4>
+                                <span id="dash-grid-depots"><%= result.directory.depots %></span> 
+                                <small>Warehouses</small>
+                            </h4>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>
+                                <span id="dash-grid-factories"><%= result.directory.factories %></span>
+                                <small>Factories</small>
+                            </h4>
+                        </li>
+                    </ul>
+
+                    <a href="/demo/directory" class="btn btn-outline-primary btn-sm card-buttons">See More</a>
+
+                </section>
+            </section>
+
+        </div>
+        
+    </div>
+
+    <!-- New Row -->
+    <div class="row no-gutters">
+        <!-- Column -->
+        <div class="col-lg-5 col-md-5 no-padding-x" id="infocards-logs">
+
+            <section class="card">
+                <p class="card-header">Logs (All Time)</p>
+                <section class="card-block">
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h4>
+                                <span id="dash-grid-transferins"><%= result.logs.in %></span> 
+                                <small>Transfer Ins</small>
+                            </h4>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>
+                                <span id="dash-grid-transferouts"><%= result.logs.out %></span> 
+                                <small>Transfer Outs</small>
+                            </h4>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>
+                                <span id="dash-grid-receipts"><%= result.logs.receipt %></span> 
+                                <small>Receipts</small>
+                            </h4>
+                        </li>
+                    </ul>
+
+                    <a href="/demo/logs" class="btn btn-outline-primary btn-sm card-buttons">Lookup Details</a>
+
+                </section>
+            </section>
+
+        </div>
+        <!-- Column -->
+        <div class="col-lg-6 col-md-6 no-padding-x">
+
+            <section class="card" id="infocards-about">
+                
+                <p class="card-header">About Us</p>
+
+                <section class="card-block">
+                    <h4 class="card-title"><%= result.about.name %></h4>
+                    <p class="text"><%= result.about.address %></p>
+                    <a href="<%= result.about.map_url %>" target="_blank">Show on Map</a>
+                    <p class="text">Contact: <%= result.about.contact %> (<%= result.about.phone %>)</p>
+                </section>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+</article>

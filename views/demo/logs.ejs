@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Logs - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/demo">Home</a></li>
+                                <li class="breadcrumb-item active">Inventory Logs</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Logs</h3>
+                        </header>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7 col-sm-12 search" dataset="StockReceipt">
+                            <div class="input-group">
+                                <button type="button" correspondence="productName" class="btn btn-secondary dropdown-toggle search-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Name
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item search-option" correspondence="productName">Name</a>
+                                    <a class="dropdown-item search-option" correspondence="_id">ID</a>
+                                    <a class="dropdown-item search-option" correspondence="originId">Origin ID</a>
+                                </div>
+                                <input type="text" class="form-control" id="search-keyword" placeholder="Keyword">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary search-button"><span class="glyphicon glyphicon-search"></span><span class="hidden-xs-down"> Search</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-11 col-md-11">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active table-toggle" data-toggle="tab" href="#receipts-table" role="tab" dataset="StockReceipt">Reciept (Factory)</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link table-toggle" data-toggle="tab" href="#transfers-table" role="tab" dataset="StockTransfer">Transfer (In/Out)</a>
+                                </li>
+                        </div>
+                    </div>
+
+                   
+                    <div class="row">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="receipts-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Product</th>
+                                            <th>QTY.</th>
+                                            <th>Origin ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody showing="<%= receipts.data.length %>" id="tbody-StockReceipt">
+                                    <% receipts.data.forEach(function(item, index){ %>
+                                        <tr scope="row" data-toggle="tooltip" data-placement="top" title="<%= receipts.data[index].status %>">
+                                            <td><%= receipts.data[index]._id %></td>
+                                            <td><%= receipts.data[index].productName %></td>
+                                            <td><%= receipts.data[index].quantity %></td>
+                                            <td><%= receipts.data[index].originId %></td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="StockReceipt" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
+                            </div>
+                            <div class="tab-pane" id="transfers-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Product</th>
+                                            <th>QTY.</th>
+                                            <th>Origin ID</th>
+                                            <th class="hidden-xs-down">Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody showing="<%= transfers.data.length %>" id="tbody-StockTransfer">
+                                    <% transfers.data.forEach(function(item, index){ %>
+                                        <tr scope="row" data-toggle="tooltip" data-placement="top" title="<%= transfers.data[index].status %>">
+                                            <td><%= transfers.data[index]._id %></td>
+                                            <td><%= transfers.data[index].productName %></td>
+                                            <td><%= transfers.data[index].quantity %></td>
+                                            <td><%= transfers.data[index].originId %></td>
+                                        <td class="hidden-xs-down">
+                                            <a href="/demo/transfers/print/packingslip/<%= transfers.data[index]._id %>"><button type="button" class="btn btn-secondary btn-sm">Slip</button></a>
+                                        </td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="StockTransfer" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>

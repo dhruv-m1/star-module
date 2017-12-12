@@ -1,0 +1,22 @@
+{
+    "StockLocations": {
+        "allow": true,
+        "query_format": "{}"
+    },
+    "plants": {
+        "allow": true,
+        "query_format": "{}"
+    },
+    "Inventory": {
+        "allow": true,
+        "query_format": "{locationId: <loc>}"
+    },
+    "StockReceipt": {
+        "allow": true,
+        "query_format": "{destinationId: <loc>}"
+    },
+    "StockTransfer": {
+        "allow": true,
+        "query_format": "{$or: [ { originId: <loc> }, { destinationId: <loc> }]}"
+    }
+}

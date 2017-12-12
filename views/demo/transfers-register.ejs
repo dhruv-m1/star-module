@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Transfers - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/demo">Home</a></li>
+                                <li class="breadcrumb-item active">Transfers</li>
+                                <li class="breadcrumb-item active"> <%= data.productName %></li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Transfer Selection</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Batch</th>
+                                        <th>QTY.</th>
+                                        <th>Avail. QTY</th>
+                                    </tr>
+                                </thead>
+                                <tbody batches="<%= data.batches %>">
+                                    <% data.batches.forEach(function(item, index){ %>
+                                        <tr>
+                                            <td><%= item %></td>
+                                            <td><input id="<%= item %>" type="number" class="form-control" style="width: 105px" min="0" max="<%= data.batchQuantity[index] %>" placeholder="0"></td>
+                                            <td><%= data.batchQuantity[index] %></td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Additional Details
+                                </div>
+                                <div class="card-block">
+                                    <form class="form-inline" onsubmit="return transfers.register();">
+                                        <center class="hidden-sm-up"><p>Destination Warehouse (ID)</p></center>
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <div class="input-group-addon hidden-xs-down">Destination Warehouse (ID)</div>
+                                            <input type="text" class="form-control" id="destinationId" placeholder="e.g. 5CS31029T" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" id="Transfers-Confirm">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>

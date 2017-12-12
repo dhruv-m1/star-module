@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Directory - Star Module Demo</title>
+        <% include partials/universal-dependencies/external-css.ejs %>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="row align-items-start no-gutters">
+
+                <% include partials/navigation.ejs %>
+
+                <div class="col-lg-9 col-md-9 scrollable">
+
+                    <div class="row content-top">
+                        <header id="page-heading">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/demo">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                            <h3> <small><span class="glyphicon glyphicon-menu-left sidebar-toggle" aria-hidden="true" id="sidebar-open"></span></small> Directory</h3>
+                        </header>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-11 col-md-11">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#depots-table" role="tab">Warehouses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#factories-table" role="tab">Factories</a>
+                                </li>
+                        </div>
+                    </div>
+
+                   
+                    <div class="row">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="depots-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="hidden-xs-down">ID</th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody showing="<%= warehouses.data.length %>" id="tbody-StockLocations">
+                                    <% warehouses.data.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= warehouses.data[index]._id %></td>
+                                            <td><%= warehouses.data[index].name %></td>
+                                            <td><%= warehouses.data[index].address %></td>
+                                            <td><%= warehouses.data[index].contact %> (<%= warehouses.data[index].phone %>)</td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="StockLocations" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="factories-table" role="tabpanel">
+                                <table class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="hidden-xs-down">ID</th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody showing="<%= plants.data.length %>" id="tbody-plants">
+                                    <% plants.data.forEach(function(item, index){ %>
+                                        <tr scope="row">
+                                            <td class="hidden-xs-down"><%= plants.data[index]._id %></td>
+                                            <td><%= plants.data[index].name %></td>
+                                            <td><%= plants.data[index].address %></td>
+                                            <td><%= plants.data[index].contact %> (<%= plants.data[index].phone %>)</td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                                <center>
+                                    <button type="button" id="inventory-showmore" dataset="plants" search="false" class="ShowMore btn btn-outline-primary">Show More</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <% include partials/universal-dependencies/external-js.ejs %>
+    </body>
+</html>
