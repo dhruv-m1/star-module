@@ -91,6 +91,12 @@ module.exports.Inventory = mongoose.model('Inventory', new Schema({
 },{ collection: 'Inventory' }));
 
 module.exports.plants = mongoose.model('plants', new Schema({
+    _id: {
+        type: shortid,
+        len: 9,
+        alphabet: 'STOCKLCAINR1234567890', //Base will trigger is this character set is not sufficient.
+        base: 64
+    },
     name: String,
     owner: String,
     address: String,
