@@ -1,20 +1,21 @@
-//STAR Module - Written by Dhruv Malik
+//Application Start Point - This is the first file executed on application startup.
+//Requring packages/liberaries needed.
 const express = require('express');
-const app = express();
 
+const app = express();
 const cookieParser = require('cookie-parser');
 const routes = require('./routes/core');
 const gateway = require('./gateway');
 const assert = require('assert');
-app.listen(process.env.port || 3030);
-
+const db = require('./app-data/db-settings');
+app.listen(process.env.port || 3030); //Declaring port on which application will run.
+// Intializing Middleware
 app.use('/api', routes);
 app.use('/static', express.static('static'));
 app.set('view engine', 'ejs');
-const db = require('./app-data/db-settings');
 app.use(cookieParser());
 
-//Renders for Demo Application
+//Custom Middleware for checking login sessions.
 let loc;
 app.use(function (req, res, next) {
     try {
@@ -36,8 +37,11 @@ app.use(function (req, res, next) {
     }
 });
 
+//Declaring renders for all pages on frontend.
+
 app.get('/demo/', function(req, res){
     gateway.getLocStats(loc._id).then(function(result){
+        //Sends required data to EJS template engine for rendering.
         res.render('demo/index', {result: result, loc: loc});
     });
 })

@@ -3,18 +3,21 @@ const db = require('../../app-data/db-settings');
 const fs = require('fs');
 
 const gateway = require('../../gateway');
-
+//Permissions function checks if the client request is allowed to execute.
 module.exports.permissions = function (dataset, res, req, reqType){
     return new Promise((resolve, reject) => {
         try{
             let permissionsManifest;
             if (reqType != 'verifiy-loc'){
+                //Checking permissions from file
                 permissionsManifest = JSON.parse(fs.readFileSync(__dirname + `/${reqType}/permissions.json`));
             }else {
+                //if only client authentication need to verified, the file is not downloaded.
                 permissionsManifest = {null:{allow:true}};
             }
 
             if (permissionsManifest[dataset].allow === true){
+                //Checking if client is authenticated.
                 gateway.setConnection(res, req).then(function(result){
 
                     try {
@@ -22,9 +25,10 @@ module.exports.permissions = function (dataset, res, req, reqType){
                                 throw 401;
                         }else{
                             if (reqType === 'verifiy-loc') {
+                                // If Authenticated, a response is returned to the target function
                                 resolve(dataset);
                             } else{
-
+                                //For post reuests, a query string is created here to prevent code injection.
                                 let query = permissionsManifest[dataset].query_format;
 
                                 query = query.replace(new RegExp("<loc>", 'g'), `"${result._id}"`);
@@ -51,7 +55,8 @@ module.exports.permissions = function (dataset, res, req, reqType){
         }
     });
 }
-
+/* MongoDB does not automatically validate the schema. Hence, this function
+validates the schema before the record is saved.*/
 module.exports.schemaValidate = function (collection, record) {
 
     let response = null;

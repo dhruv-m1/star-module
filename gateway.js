@@ -1,9 +1,9 @@
-// Written by Dhruv M in 2017
+// Requiring Packages
 const db = require('./app-data/db-settings');
 const http = require('http');
 
 const bcrypt = require('bcrypt');
-
+//Commonly used 'DB Read' function wrapped in promises to simplfiy code in this file.
 let typicalDBRead = (collection, query, filters, statsOnly) => {
 
     return new Promise((resolve, reject) => {
@@ -22,12 +22,11 @@ let typicalDBRead = (collection, query, filters, statsOnly) => {
 
     });
 }
-
+// Function to get dataset stats for dashboard.
 module.exports.getLocStats = (locid) => {
     return new Promise((resolve, reject) => {
         let count = 0;
         let stats = {
-            products: null,
             inventory: null,
             categories: null,
             directory: {
@@ -44,12 +43,11 @@ module.exports.getLocStats = (locid) => {
 
         let done = () => {
             count++;
-            if (count === 8){
+            if (count === 7){
                 resolve(stats);
             }
         }
 
-        typicalDBRead('ProductList', {}, {}, true).then(function(result){stats.products = result; done();});
         typicalDBRead('StockLocations',{}, {}, true).then(function(result){stats.directory.depots = result; done();});
         typicalDBRead('plants', {}, {}, true).then(function(result){stats.directory.factories = result; done();});
 
@@ -63,7 +61,7 @@ module.exports.getLocStats = (locid) => {
 
     });
 }
-
+//Will find and get location details based on ID
 let getLocDetails = (id) => {
     return new Promise((resolve, reject) => {
 
@@ -73,7 +71,7 @@ let getLocDetails = (id) => {
         
     });
 }
-
+//Checks if the orgininating request is from an authenticated client.
 module.exports.setConnection = (res, req) =>{
     return new Promise((resolve, reject) => {
         typicalDBRead('_sessions',{'_id': req.cookies.sessionId}, {}, false).then(function(result){
@@ -86,6 +84,7 @@ module.exports.setConnection = (res, req) =>{
             bcrypt.compare(req.cookies.authkey, result[0].authkey, function(err, allow) {
                 
                 if(allow === true){
+                    //If the client authenticates for the first time, their IP and User agent will be captured.
                     if (result[0].userip === "captureOnFirstAccess") {
 
                         db._sessions.updateOne({'_id': req.cookies.sessionId}, { userip: `${req.ip}`, useragent:`${req.headers['user-agent']}` }).exec(function(err, updateData){
@@ -94,7 +93,7 @@ module.exports.setConnection = (res, req) =>{
                             });
                         });
                     }
-
+                    //For any subsequent request, the IP, User-Agent, Auth Key & Session ID will be cross-checked.
                     else if (result[0].userip === req.ip && result[0].useragent === req.headers['user-agent']){
                         getLocDetails(result[0].currentLocation).then(function(data){
                             
@@ -110,7 +109,7 @@ module.exports.setConnection = (res, req) =>{
         });
     });
 }
-
+//Finds and returns inventory record for product being transferred.
 module.exports.getTransferData = (location, article) => {
     return new Promise((resolve, reject) => {
         typicalDBRead('Inventory', {'locationId': location, 'productId': article}, {}, false).then(function(result){
@@ -118,6 +117,7 @@ module.exports.getTransferData = (location, article) => {
         });
     });
 }
+// Finds appropriate information and reutrns a combined JSON object for generating transfer slip.
 module.exports.getTransferConfirmation = (logid) => {
     return new Promise((resolve, reject) => {
         typicalDBRead('StockTransfer', {'_id': logid}, {}, false).then(function(result){
@@ -129,6 +129,7 @@ module.exports.getTransferConfirmation = (logid) => {
         });
     });
 }
+// Gets first 10 records for Inventory, Logs & Directory pages to avoid AJAX request on load.
 module.exports.getFirstPage = (collection, locid) => {
 
     return new Promise((resolve, reject) => {
