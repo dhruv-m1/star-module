@@ -6,7 +6,7 @@ STAR Module (Stock Transfer and Receipt Module) is a web application I made duri
 
 <br/>
 
-<a href="https://github.com/dhruv-tech/star-module/blob/master/STAR_archieve_screenshot.gif"><img alt="Application Screenshot" src="https://github.com/dhruv-tech/star-module/blob/master/STAR_archieve_screenshot.gif?raw=true" width="700"></a>
+<a href="https://github.com/dhruv-tech/star-module/blob/master/STAR_archieve_screenshot-min.gif"><img alt="Application Screenshot" src="https://github.com/dhruv-tech/star-module/blob/master/STAR_archieve_screenshot-min.gif?raw=true" width="700"></a>
 
 (Click to enlarge, GIF may take few seconds to load)
 ## Introduction
