@@ -11,7 +11,7 @@ STAR Module (Stock Transfer and Receipt Module) is a web application I made duri
 (Click to enlarge, GIF may take few seconds to load)
 ## Introduction
 
-STAR Module was built as a web application for keeping track of the inflow and outflow of stock within warehouses of a retail/manufacturing company.
+STAR Module was built as a responsive web application for keeping track of the inflow and outflow of stock within warehouses of a retail/manufacturing company.
 
 Conventionally, heaps of logbooks are used to keep track of the same. When stock is transferred from a warehouse, the product names, quantity per batch and destination are written in a logbook. 
 A copy of this information is also attached with the consignment as a note. This information is then checked at the destination warehouse to verify the consignment. 
