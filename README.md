@@ -69,7 +69,6 @@ Node.js, Express, EJS, Bootstrap, JQuery, [InstaScan](https://github.com/schmich
 
 ## Further Details
 
-* For introduction and context, click [here](https://github.com/dhruv-tech/star-module).
 * For screenshots and wireframes, click [here](https://github.com/dhruv-tech/star-module/wiki/Screenshots-and-Wireframes).
 * For details on Backend Implementation, click [here](https://github.com/dhruv-tech/star-module/wiki/Backend-Implementation).
 * For details on Frontend workflow, click [here](https://github.com/dhruv-tech/star-module/wiki/Frontend-workflow).
