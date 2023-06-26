@@ -22,7 +22,7 @@ The application is a 'module' in that, it is expected to be integrated with an e
 
 ## Tech Stack
 
-Node.js, Express, EJS, Bootstrap, JQuery, [InstaScan](https://github.com/schmich/instascan) (for QR code scanning), Normalize (CSS Reset).
+Node.js, Express, EJS, Bootstrap, JQuery, [InstaScan](https://github.com/schmich/instascan) (for QR code scanning), Normalize (CSS Reset), MongoDB.
 
 ## Features
 
@@ -60,6 +60,8 @@ Node.js, Express, EJS, Bootstrap, JQuery, [InstaScan](https://github.com/schmich
 * Data is searchable on the Product ID, Origin and ID fields.
 * Separate tables for receipts and transfers are provided.
 
+(Note: receipts = consignments from factories; transfers = consignments to/from other warehouses).
+
 ### Directory
 
 * List of all stock locations within the company displayed in tabular format with columns: ID, Name, Address, and Phone. 
@@ -67,10 +69,11 @@ Node.js, Express, EJS, Bootstrap, JQuery, [InstaScan](https://github.com/schmich
 
 ## Further Details
 
-* For screenshots and wireframes click here.
-* For details on Backend Implementaion click here.
-* For details on Frontend workflow click here.
-* For Entity Relationship Diagram click here.
+* For introduction and context, click [here](https://github.com/dhruv-tech/star-module).
+* For screenshots and wireframes, click [here](https://github.com/dhruv-tech/star-module/wiki/Screenshots-and-Wireframes).
+* For details on Backend Implementation, click [here](https://github.com/dhruv-tech/star-module/wiki/Backend-Implementation).
+* For details on Frontend workflow, click [here](https://github.com/dhruv-tech/star-module/wiki/Frontend-workflow).
+* For Entity Relationship Diagram, click [here](https://github.com/dhruv-tech/star-module/wiki/Entity-Relationship-Diagram).
 
 ---
 
