@@ -8,7 +8,7 @@ STAR Module (Stock Transfer and Receipt Module) is a web application I made duri
 
 <a href="https://github.com/dhruv-tech/star-module/blob/master/STAR_archieve_screenshot.gif"><img alt="Application Screenshot" src="https://github.com/dhruv-tech/star-module/blob/master/STAR_archieve_screenshot.gif?raw=true" width="700"></a>
 
-(Click to enlarge, GIF may take a few seconds to load)
+(Click to enlarge, GIF may take few seconds to load)
 ## Introduction
 
 STAR Module was built as a web application for keeping track of the inflow and outflow of stock within warehouses of a retail/manufacturing company.
